@@ -2,24 +2,31 @@
 
 \usepackage{amsmath, amsfonts, amsthm}
 \usepackage[scale = 0.8]{geometry}
+\def\ve{\varepsilon}
 
 \begin{document}
     \section*{Problem 1}
     Let $S_n(x) = \sum_{k=1}^n f_k(x)$. For $m \ge n$,
     \begin{align*}
-        \sum_{k=1}^m f_k g_k - \sum_{k=1}^n f_k g _k &= \sum_{k=n}^{m-1}S_k(g_k-g_{k+1})
+        \sum_{k=1}^m f_k g_k - \sum_{k=1}^n f_k g_k &= \sum_{k=n}^{m-1}S_k(g_k-g_{k+1})
             + (S_m g_m - S_n g_n) 
     \end{align*}
     Since $|S_n| \le C$ for $n \in \mathbb{N}$ and $g_k - g_{k+1} \ge 0$ for any 
-    $k \in \mathbb{N}$, we have:
+    $k \in \mathbb{N}$, which by convergence of $g$ shows that $g_m > 0, g_n > 0$,we have:
     \begin{align*}
         \left| \sum_{k=1}^m f_k g_k\right| \le \sum_{k=n}^{m-1} C (g_k-g_{k+1}) + 
-            C(g_m - g_n) = 2Cg_n
+            C(g_m + g_n) = 2Cg_n
     \end{align*}
     Since $g_n$ converges uniformly on $E$ to 0, for any $\varepsilon > 0$, there 
     exist $N(\varepsilon)$ such that for $n \ge N$, we have $g_n<\frac{\varepsilon}{2C}$.
     Thus we conclude that for $N \le n \le m$, 
     \begin{align*}
-        \left| \sum_{k=1}^m f_k g_k\right|
+        \left| \sum_{k=1}^m f_k g_k - \sum_{k=1}^n f_k g_k\right| \le 2Cg_n < \varepsilon
     \end{align*}
+    Since it holds for every $x \in E$, we have 
+    \begin{align*}
+        \left\| \sum_{k=1}^m f_k g_k-\sum_{k=1}^n f_k g_k \right\|_E \le 2Cg_n < \ve
+    \end{align*}
+    By cauchy criterion, it converges uniformly.
+    
 \end{document}
