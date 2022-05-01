@@ -31,7 +31,19 @@
     By cauchy criterion, it converges uniformly.
     
     \section*{Problem 2}
-    Let $R_n(x) = \sum_{k=n}^\infty f_n$
+    Let $R_n(x) = \sum_{k=n}^\infty f_n$, because $\sum_{k=1}^\infty f_n$ converges.
+    For $m \ge n$,
+    \begin{align*}
+        \sum_{k=1}^m f_k g_k - \sum_{k=1}^n f_k g_k &= 
+            R_n g_n - R_{m+1} g_m + \sum_{k=n}^{m-1}R_{k+1} (g_{k+1} - g_k)
+    \end{align*}
+    Since $g_{k} \ge g_{k+1}$, we have:
+    \begin{align*}
+        \left| \sum_{k=1}^m f_k g_k - \sum_{k=1}^n f_k, g_k \right| &\le
+            |R_n| |g_n| + |R_{m+1}| |g_m| + \sum_{k=n}^{m-1} |R_{k+1}| (g_k - g_{k+1})
+    \end{align*}
+    Since $\sum_{k=1}^\infty f_n$ converges uniformly on $E$, there exist $N$ such that
+    for 
     \section*{Problem 3}
     \begin{align*}
         \sin 
