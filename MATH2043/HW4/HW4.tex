@@ -2,6 +2,7 @@
 
 \usepackage{amsmath, amsfonts, amsthm}
 \usepackage[scale = 0.8]{geometry}
+\usepackage[shortlabels]{enumitem}
 \def\ve{\varepsilon}
 
 \begin{document}
@@ -31,7 +32,7 @@
     By cauchy criterion, it converges uniformly.
     
     \section*{Problem 2}
-    Let $R_n(x) = \sum_{k=n}^\infty f_n$, because $\sum_{k=1}^\infty f_n$ converges.
+    Let $R_n(x) = \sum_{k=n}^\infty f_n (x)$, because $\sum_{k=1}^\infty f_n$ converges.
     For $m \ge n$,
     \begin{align*}
         \sum_{k=1}^m f_k g_k - \sum_{k=1}^n f_k g_k &= 
@@ -42,10 +43,46 @@
         \left| \sum_{k=1}^m f_k g_k - \sum_{k=1}^n f_k, g_k \right| &\le
             |R_n| |g_n| + |R_{m+1}| |g_m| + \sum_{k=n}^{m-1} |R_{k+1}| (g_k - g_{k+1})
     \end{align*}
-    Since $\sum_{k=1}^\infty f_n$ converges uniformly on $E$, there exist $N$ such that
-    for $n > N$, we have $|R_n| \le \frac{\ve}{4C}$.
-    \section*{Problem 3}
+    Since $\sum_{k=1}^\infty f_n$ converges uniformly on $E$, for any $\ve > 0$,
+    there exist $N$ such that for $n > N$,
+    we have $|R_n| \le \frac{\ve}{4C}$. Also since $g_k$ is bounded by $C$,
+    we have
     \begin{align*}
-        \sin 
+        \left| \sum_{k=1}^m f_k g_k - \sum_{k=1}^n f_j g_k \right| &\le 
+            C \cdot \frac{\ve}{4C} \cdot 2 + \frac{\ve}{4C} \sum_{k=n}^{m-1} 
+            (g_k - g_{k+1}) \\
+            &= \frac{\ve}{2} + \frac{\ve}{4C} (g_n - g_m) \\
+            &\le \frac{\ve}{2} + \frac{\ve}{4C} (|g_n|+g_m|) \le \ve
     \end{align*}
+    By cauchy criterion, this implies uniform convergence.
+
+    \section*{Problem 3}
+    \begin{enumerate}[(a)]
+        \item 
+        $\frac{1}{n} \ge \frac{1}{n+1}$ for any $n$, and 
+        $\frac{1}{n}$ converges uniformly to zero. For $\sin nx$, we have:
+        \begin{align*}
+            \left| \sum_{k=1}^n \sin kx \right| &= \left| \frac{\sin\frac{kx+x}{2}
+            \sin\frac{kx}{2}}{\sin\frac{x}{2}} \right| \\
+            &\le\frac{1}{\left|\sin\frac{x}{2} \right|}
+        \end{align*}
+        since $x \in [\ve, 2\pi - \ve]$ where $\ve > 0$, $\sin \frac{x}{2} \ge \sin
+        \frac{\ve}{2} > 0$. Therefore $\frac{1}{\left|\sin\frac{x}{2} \right|}$ is bounded
+        by $\frac{1}{\left|\sin\frac{\ve}{2} \right|}$. By Dirichlet's test, it converges
+        uniformly on $[\ve, 2\pi - \ve], \ve > 0$.
+        \item 
+        By alternating series test, $\sum_{n=1}^\infty \frac{{(-1)}^n}{n}$ converges.
+        Also $x^n \ge x^{n+1}$ for $x \in [0,1]$ and $|x^n| \le 1$ for and $n\in\mathbb{N}
+        $ and $x \in [0, 1]$. By Abel's test, it converges uniformly on $[0, 1]$.
+        \item 
+        By integral test, 
+        \begin{align*}
+            \int_2^\infty \frac{dx}{x {(\log x)}^2} &= -\frac{1}{\log(x)} \bigg|_2^\infty \\
+            &= \frac{1}{\log 2} < \infty
+        \end{align*}
+        Therefore $\sum_{k=2}^\infty \frac{1}{k{(\log k)}^2}$ converges.
+        And since $\bigg|\frac{x^k}{k{(\log k)}^2}\bigg| \le \frac{1}{k{(\log k)}^2}$ for 
+        $x \in [-1, 1]$, by Weiestrass' M-test, it converges uniformly on $[-1, 1]$.
+    \end{enumerate}
+    
 \end{document}
