@@ -20,7 +20,8 @@
     \end{align*}
     In each iteration of original BFS, we will extract $u$ from the queue, and find
     all its neighbours $v$. We will discard the test of whether $v$ has been visited
-    or not. We will compare $D[u]+1$ and $D[v]$. If $D[u] + 1 < D[v]$, then we will do 
+    or not, since it is embedded in the folloeing test.
+    We will compare $D[u]+1$ and $D[v]$. If $D[u] + 1 < D[v]$, we will do 
     $D[v] \gets D[u] + 1, S[v] = 1$ and put $v$ into queue. 
     If $D[u]+1 = D[v]$, then we will do $S[v] \gets S[v] + 1$, however,
     we will not put $v$ into queue. If $D[u] + 1 > D[v]$, then we do nothing.
@@ -34,11 +35,11 @@
             \While{$Q \neq \phi$}
                 \State{$u \gets$ \textproc{Dequeue} ($Q$)} 
                 \For{$v \in Adj[u]$}
-                    \If{$D[u] + 1 < D[v]$}
+                    \If{$D[u] + 1 < D[v]$} \Comment{Need to add $v$ into queue}
                         \State{$D[v] \gets D[u] + 1$}
                         \State{$S[v] \gets 1$}
                         \State{\textproc{Enqueue} ($Q, v$)}
-                    \ElsIf{$D[u] + 1 = D[v]$}
+                    \ElsIf{$D[u] + 1 = D[v]$} \Comment{Another path to $v$ exists}
                         \State{$S[v] \gets S[v] + 1$}
                     \EndIf{}
                 \EndFor{}
@@ -46,4 +47,7 @@
             \Return{$S$}
         \end{algorithmic}
     \end{algorithm}
+
+    \section*{Problem 2}
+    
 \end{document}
