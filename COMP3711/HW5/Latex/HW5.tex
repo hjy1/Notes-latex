@@ -1,0 +1,49 @@
+\documentclass{report}
+
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocodex}
+\usepackage{amsmath, amsfonts, amsthm}
+\usepackage[scale = 0.8]{geometry}
+
+\begin{document}
+    \section*{Problem 1}
+    \subsection*{Discription}
+    A modification could be adding a new array $S[n]$ for the number of shortest paths 
+    from $s$ to vertex $n$, and an array $D[n]$ for length of the shortest path from 
+    $s$ to vertex $n$. Obviously $S[n]$ is our answer. We initially set 
+    \begin{align*}
+        S[s] &= 1 \\
+        S[n \neq s] &= 0 \\
+        D[s] &= 0 \\
+        D[n \neq s] &= \infty
+    \end{align*}
+    According to every iteration of BFS, we will extract $u$ from the queue, and find
+    all its neighbours $v$. We will discard the test of whether $v$ has been visited
+    or not. We will compare $D[u]+1$ and $D[v]$. If $D[u] + 1 < D[v]$, then we will do 
+    $D[v] \gets D[u] + 1, S[v] = 1$ and put $v$ into queue. 
+    If $D[u]+1 = D[v]$, then we will do $S[v] \gets S[v] + 1$, however,
+    we will not put $v$ into queue. If $D[u] + 1 > D[v]$, then we do nothing.
+    \subsection*{Pseudocode}
+    \begin{algorithm}
+        \caption[]{Modified BFS}
+        \begin{algorithmic}[1]
+            \State{Initialize $D$ and $S$ as stated before}
+            \State{Initialize an empty queue $Q$}
+            \State{\textproc{Enqueue} ($Q, s$)}
+            \While{$Q \neq \phi$}
+                \State{$u \gets$ \textproc{Dequeue} ($Q$)} 
+                \For{$v \in Adj[u]$}
+                    \If{$D[u] + 1 < D[v]$}
+                        \State{$D[v] \gets D[u] + 1$}
+                        \State{$S[v] \gets 1$}
+                        \State{\textproc{Enqueue} ($Q, v$)}
+                    \ElsIf{$D[u] + 1 = D[v]$}
+                        \State{$S[v] \gets S[v] + 1$}
+                    \EndIf{}
+                \EndFor{}
+            \EndWhile{}
+            \Return{$S$}
+        \end{algorithmic}
+    \end{algorithm}
+\end{document}
