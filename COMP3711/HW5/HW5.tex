@@ -18,7 +18,7 @@
         D[s] &= 0 \\
         D[n \neq s] &= \infty
     \end{align*}
-    According to every iteration of BFS, we will extract $u$ from the queue, and find
+    In each iteration of original BFS, we will extract $u$ from the queue, and find
     all its neighbours $v$. We will discard the test of whether $v$ has been visited
     or not. We will compare $D[u]+1$ and $D[v]$. If $D[u] + 1 < D[v]$, then we will do 
     $D[v] \gets D[u] + 1, S[v] = 1$ and put $v$ into queue. 
