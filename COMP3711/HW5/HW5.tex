@@ -20,7 +20,7 @@
     \end{align*}
     In each iteration of original BFS, we will extract $u$ from the queue, and find
     all its neighbours $v$. We will discard the test of whether $v$ has been visited
-    or not, since it is embedded in the folloeing test.
+    or not, since it is embedded in the following test.
     We will compare $D[u]+1$ and $D[v]$. If $D[u] + 1 < D[v]$, we will do 
     $D[v] \gets D[u] + 1, S[v] = 1$ and put $v$ into queue. 
     If $D[u]+1 = D[v]$, then we will do $S[v] \gets S[v] + 1$, however,
@@ -105,4 +105,45 @@
     movement from $t$ to $s$ indicates $|C_s| > |V| / 2$. Therefore, $|C_s| + |C_t| > |V|$,
     but $|C_s| + |C_t| = |V|$ obviously and this incurs contradiction.
     \end{proof}
+
+    \section*{Problem 4}
+    From a grid $M$ of size $n \times n$, we generate a graph with $2n+2$ points as 
+    following: $s, t, a_1, \ldots, a_n, b_1, \ldots, b_n$.
+    \subsection*{Generate Graph}
+    \begin{algorithm}
+        \caption{Generation of Graph}
+        \begin{algorithmic}[1]
+            \For{$i$ from 1 to $n$}
+                \State{addedge $s, a_i, 1$}
+                \Comment{addedge $x, y, d$: add a directed edge from $x$ to $y$ of with
+                    capacity $d$}
+                \State{addedge $b_i, t, 1$}
+            \EndFor{}
+            \For{$i$ from 1 to $n$}
+                \For{$j$ from 1 to $n$}
+                    \If{$M[i][j]$ is white}
+                        \State{addedge $a_i, b_j, 1$}
+                    \EndIf{}
+                \EndFor{}
+            \EndFor{}
+        \end{algorithmic}
+    \end{algorithm}
+    Then we run a maxflow algorithm to get the maximum flow $k$. We will also record $E$,
+    the set of edges that has been used in the maxflow between $a's$ and $b's$. 
+    For each pair $(a_i, b_j)$ in $E$, we will place the token on $M$ with axis $(i, j)$,
+    row = $i$, col = $j$. 
+    \newtheorem*{l1}{Lemma 1}
+    \begin{l1}
+        Every token is placed on a white cell.
+    \end{l1}
+    This is obvious since $E$ is a subset of all edges between $a's$ and $b's$, which 
+    is generated if and only if the corresponding position is white.
+    \newtheorem*{l2}{Lemma 2}
+    \begin{l2}
+        Each row and each column of the grid has \textbf{at most} one token.
+    \end{l2}
+    Suppose there are $t>1$ tokens in row $i$, then it there are $t$ edges from
+    $a_i$ is used, which means that $t$ units of flow have passed $a_i$. This is not 
+    possible since the maximum in-flow of $a_i$ is 1, thus flow balance is broken.
+    The case of $t>1$ tokens in col $j$ can be proved likewise. 
 \end{document}
