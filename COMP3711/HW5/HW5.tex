@@ -25,9 +25,10 @@
     $D[v] \gets D[u] + 1, S[v] = 1$ and put $v$ into queue. 
     If $D[u]+1 = D[v]$, then we will do $S[v] \gets S[v] + 1$, however,
     we will not put $v$ into queue. If $D[u] + 1 > D[v]$, then we do nothing.
+
     \subsection*{Pseudocode}
     \begin{algorithm}
-        \caption[]{Modified BFS}
+        \caption{Modified BFS}
         \begin{algorithmic}[1]
             \State{Initialize $D$ and $S$ as stated before}
             \State{Initialize an empty queue $Q$}
@@ -49,5 +50,34 @@
     \end{algorithm}
 
     \section*{Problem 2}
-    It is obvious that
+    \subsection*{Discription}
+    During each iteration of topological sorting, there are possibly many vertexs with 
+    in-degree zero. The original algorithm gives not specification on which to select. 
+    We claim that by greedily selecting the smallest available index at each itereation 
+    respectively, one can achieve a minimum lexicographic ordering at the end.
+    The modification will be replacing the queue in topological sorting with a min-heap. 
+
+    \subsection*{Pseudocode}
+    \begin{algorithm}
+        \caption{Modified topological sorting}
+        \begin{algorithmic}[1]
+            \State{Initialize H to be an empty heap}
+            \For{u in V}
+                \If{in-degree[u] = 0}
+                    \State{add u to H}
+                \EndIf{}
+            \EndFor{}
+            \While{H is non-empty}
+                \State{u = H.top}
+                \State{H.pop}
+                \State{Outpur u}
+                \For{v in Adj[u]}
+                    \State{in-degree[v] = in-degree[v]-1}
+                    \If{in-degree[v] = 0}
+                        \State{add v to H}
+                    \EndIf{}
+                \EndFor{}
+            \EndWhile{}
+        \end{algorithmic}
+    \end{algorithm}
 \end{document}
