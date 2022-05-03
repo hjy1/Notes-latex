@@ -56,7 +56,7 @@
     We claim that by greedily selecting the smallest available index at each itereation 
     respectively, one can achieve a minimum lexicographic ordering at the end.
     The modification will be replacing the queue in topological sorting with a min-heap. 
-
+    \newpage
     \subsection*{Pseudocode}
     \begin{algorithm}
         \caption{Modified topological sorting}
@@ -68,8 +68,7 @@
                 \EndIf{}
             \EndFor{}
             \While{H is non-empty}
-                \State{u = H.top}
-                \State{H.pop}
+                \State{u = H.top, H.pop}
                 \State{Outpur u}
                 \For{v in Adj[u]}
                     \State{in-degree[v] = in-degree[v]-1}
@@ -80,4 +79,10 @@
             \EndWhile{}
         \end{algorithmic}
     \end{algorithm}
+
+    \section*{Problem 3}
+    \begin{proof}
+    The only terminating exit of the algorithm is the step four. The termination condition
+    is that the maximum connected component of $T - \{v\}$
+    \end{proof}
 \end{document}
