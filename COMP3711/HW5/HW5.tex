@@ -5,7 +5,7 @@
 \usepackage{algpseudocodex}
 \usepackage{amsmath, amsfonts, amsthm}
 \usepackage[scale = 0.8]{geometry}
-
+\def\pr{\prime}
 \begin{document}
     \section*{Problem 1}
     \subsection*{Discription}
@@ -83,6 +83,26 @@
     \section*{Problem 3}
     \begin{proof}
     The only terminating exit of the algorithm is the step four. The termination condition
-    is that the maximum connected component of $T - \{v\}$
+    is that the maximum connected component $C_k$ of $T - \{v\}$ have size not greater 
+    than $|V| / 2$. It means that every connected components of $T - \{v\}$ have size 
+    not greater thant $|V| / 2$. Therefore, when the algorithm terminates, it yields the 
+    centroid.
+
+    Now we will prove that the algorithm will terminate. We prove it by contradiction. 
+    Suppose it does not terminate. Let $\{v_n\} = v_1, v_2, \ldots$ be an infinite 
+    sequence of $v's$ generated in the step 5 of the algorithm. However, the total 
+    amount of vertexs on the tree is finite, which indicates that there are repetitions
+    in $\{v_n\}$. Without lost of generality, let $s = v_i = v_j$ for an $i < j$. 
+
+    We have $i \neq j - 1$. This is obvious since the algorithm forces to find a neighbor 
+    of current poing $v$, thus any adjacent points in $\{v_n\}$ are not the same. Hence 
+    $v_i, v_{i+1}, \ldots, v_j$ formed a path on a tree from $s$ to itself. Since there 
+    are no loop in a tree, $v_{i+1} = v_{j-1}$. Let $t = v_{i+1}$, and thus we have two
+    movements: from $s$ to $t$, and $t$ to $s$.
+
+    Split the tree by removing the edge $(s, t)$, we get two connected components:
+    $C_s$, $C_t$. The movement from $s$ to $t$ indicates $|C_t| > |V| / 2$, and the 
+    movement from $t$ to $s$ indicates $|C_s| > |V| / 2$. Therefore, $|C_s| + |C_t| > |V|$,
+    but $|C_s| + |C_t| = |V|$ obviously and this incurs contradiction.
     \end{proof}
 \end{document}
