@@ -6,7 +6,10 @@
 \usepackage{amsmath, amsfonts, amsthm}
 \usepackage{enumitem}
 \usepackage[scale = 0.8]{geometry}
+
 \def\pr{\prime}
+\def\floor#1{\lfloor{} #1 \rfloor{}}
+
 \begin{document}
     \section*{Problem 1}
     \subsection*{Discription}
@@ -52,7 +55,7 @@
 
     \section*{Problem 2}
     \subsection*{Discription}
-    During each iteration of topological sorting, there are possibly many vertexs with 
+    During each iteration of topological sorting, there are possibly many vertices with 
     in-degree zero. The original algorithm gives not specification on which to select. 
     We claim that by greedily selecting the smallest available index at each itereation 
     respectively, one can achieve a minimum lexicographic ordering at the end.
@@ -92,17 +95,15 @@
     Now we will prove that the algorithm will terminate. We prove it by contradiction. 
     Suppose it does not terminate. Let $\{v_n\} = v_1, v_2, \ldots$ be an infinite 
     sequence of $v's$ generated in the step 5 of the algorithm. However, the total 
-    amount of vertexs on the tree is finite, which indicates that there are repetitions
+    amount of vertices on the tree is finite, which indicates that there are repetitions
     in $\{v_n\}$. Without lost of generality, let $s = v_i = v_j$ for an $i < j$. 
 
     We have $i \neq j - 1$. This is obvious since the algorithm forces to find a neighbor 
-    of current poing $v$, thus any adjacent points in $\{v_n\}$ are not the same. Hence 
-    $v_i, v_{i+1}, \ldots, v_j$ formed a path on a tree from $s$ to itself. Since there 
-    are no loop in a tree, $v_{i+1} = v_{j-1}$. Let $t = v_{i+1}$, and thus we have two
-    movements: from $s$ to $t$, and $t$ to $s$.
-
-    Split the tree by removing the edge $(s, t)$, we get two connected components:
-    $C_s$, $C_t$. The movement from $s$ to $t$ indicates $|C_t| > |V| / 2$, and the 
+    of current poing $v$, thus any adjacent points in $\{v_n\}$ are not the same. Let
+    $t = v_{i+1}$. Split the tree by removing the edge $(s, t)$, we get two connected components:
+    $C_s$, $C_t$. Because there is no loop on a tree, $s$ and $t$ are disconnected. Thus to 
+    get back from $t$ to $s$, we can only take the edge $(t, s)$ again latter in the sequence.
+    The movement from $s$ to $t$ indicates $|C_t| > |V| / 2$, and the 
     movement from $t$ to $s$ indicates $|C_s| > |V| / 2$. Therefore, $|C_s| + |C_t| > |V|$,
     but $|C_s| + |C_t| = |V|$ obviously and this incurs contradiction.
     \end{proof}
@@ -131,7 +132,10 @@
     \end{algorithm}
     Then we run a maxflow algorithm to get the maximum flow $k$ from $s$ to $t$. 
     We will also record $E$, the set of edges that has been used in the maxflow between 
-    $a's$ and $b's$. For each pair $(a_i, b_j)$ in $E$, we will place the token on $M$ 
+    $a's$ and $b's$. Notice that every capacity in the graph is an integer, so after only 
+    performing addition and substraction operations in an maxflow algorithm, the flow in every
+    edge must also be integral. Hence a used edge in $E$ means its flow is exactly one. 
+    For each pair $(a_i, b_j)$ in $E$, we will place the token on $M$ 
     with axis $(i, j)$, row = $i$, col = $j$. 
     \newtheorem*{l1}{Lemma 1}
     \begin{l1}
@@ -170,10 +174,46 @@
     If each row and each column has exactly one token, then obviously $|E| = n$. By lemma 3,
     $k = n$. 
 
-    Using Lemma 4, one can check if the placement stated before is valid.
+    Using Lemma 4, we can check that the placement stated before is valid. Hence the 
+    original problem can be reduced to a maxflow problem with polynomial running time.
+    If $k = n$, then we have a valid placement; if $k < n$, then no such placement exists.
 
     \section*{Problem 5}
-    
+    To find vertices that forms a remote pair with $u$, we could simply run a bfs starting
+    with $u$ to get the shortest distance from $u$ in $D$. And then we check each $D[v]$ 
+    one by one to see if $D[v] > \frac{n}{2}$. This algorithm is correct since BFS can 
+    return shortest paths of an unweighted undirected graph, and the checking part is by 
+    definition of the remote pair. The running time for BFS is $O(n+m)$, and the checking 
+    process requires $O(n)$, so the total running time is $O(n+m)$.
+
+    \newtheorem*{l5}{Lemma 5}
+    \begin{l5}
+        If $u, v$ is a remote pair, it is also a tenuous pair.
+    \end{l5}
+
+    \begin{proof}
+        Consider a BFS tree generated from $u$. We claim that there exists a layer $l$, 
+        $1 \le l < \frac{n}{2}$, such that this layer contains only one vertex. 
+        In another word, $D[x] = l$ has only one solution for $x$. Suppose not the case,
+        then all the layers between 1 and $\floor{\frac{n}{2}}$ have at least 2 vertices, 
+        altogether we have $\floor{\frac{n}{2}} \times 2 \ge n-1$ vertices. Adding $u$ and
+        $v$, we have at least $n+1$ vertices, contradiction. Thus let $x$ be the only
+        solution of $D[x] = l$. By properties of BFS tree, all vetices layers less than $l$ 
+        connect to layers larger than $l$ via $x$, otherwise there will be more vertices in 
+        layer $l$. In conclusion, removing $x$ will result in removing all paths from 
+        layers less than $l$ to layers larger than $l$. Since $d(u, v) > \frac{n}{2}$,
+        $v's$ layer is larger than $l$ and thus $u, v$ is also a tenuous pair.
+    \end{proof}
+
+    According to lemma 5, the algorithm described before can be directly used to find
+    remote tenuous pairs. The proof of lemma 5 also gives us a method to find $x$: after 
+    performing the algorithm above, we count vertices of each layers: scan through $D$ and
+    add to counter $counter[D[i]] = counter[D[i]]+1$ at every iteration.  By lemma 5, 
+    if there exists a remote pair, then there must exist $x$ such that $counter[D[x]] = 1$, 
+    scan and find it, and thus we claim that $x$ is the vertex we are looking after for all
+    tenuous vertices. If there are no remote pairs, then nothing is needed to do.
+
+    The running time is $O(n + m)$ plus two scans through $D$, hence $O(n+m)$ in total.
      
     
 
