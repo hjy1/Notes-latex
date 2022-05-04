@@ -4,6 +4,7 @@
 \usepackage{algorithmicx}
 \usepackage{algpseudocodex}
 \usepackage{amsmath, amsfonts, amsthm}
+\usepackage{enumitem}
 \usepackage[scale = 0.8]{geometry}
 \def\pr{\prime}
 \begin{document}
@@ -128,10 +129,10 @@
             \EndFor{}
         \end{algorithmic}
     \end{algorithm}
-    Then we run a maxflow algorithm to get the maximum flow $k$. We will also record $E$,
-    the set of edges that has been used in the maxflow between $a's$ and $b's$. 
-    For each pair $(a_i, b_j)$ in $E$, we will place the token on $M$ with axis $(i, j)$,
-    row = $i$, col = $j$. 
+    Then we run a maxflow algorithm to get the maximum flow $k$ from $s$ to $t$. 
+    We will also record $E$, the set of edges that has been used in the maxflow between 
+    $a's$ and $b's$. For each pair $(a_i, b_j)$ in $E$, we will place the token on $M$ 
+    with axis $(i, j)$, row = $i$, col = $j$. 
     \newtheorem*{l1}{Lemma 1}
     \begin{l1}
         Every token is placed on a white cell.
@@ -146,4 +147,34 @@
     $a_i$ is used, which means that $t$ units of flow have passed $a_i$. This is not 
     possible since the maximum in-flow of $a_i$ is 1, thus flow balance is broken.
     The case of $t>1$ tokens in col $j$ can be proved likewise. 
+    \newtheorem*{l3}{Lemma 3}
+    \begin{l3}
+        $k = |E| \le n$
+    \end{l3}
+    $E$ is a subset of all edges between $a's$ and $b's$. Since all edges between $a's$ 
+    and $b's$ are all in one direction from $a's$ to $b's$, Then 
+    \begin{align*}
+        k = f(S, T) = \sum_{e \in E} 1 = |E|
+    \end{align*}
+    Where $S = \{s, a_1, \ldots, a_n\}, T = \{b_1, \ldots, b_n, t\}$.
+
+    Since the out-degree of $s$ is $n$, the maximum flow $k \le n$.
+    \newtheorem*{l4}{Lemma 4}
+    \begin{l4}
+        Each row and each column of the grid has exactly on token if and only if $k = n$.
+    \end{l4}
+    If $|E| = k = n$. Let $x_i$ be the number of tokens in row $i$. Since the total amount
+    of tokens is $|E| = n$ by defintion, $\sum_{i=1}^n x_i = n$. By lemma 2, $x_i \le 1$,
+    thus $x_i = 1$. The columns can be proved likewise.
+
+    If each row and each column has exactly one token, then obviously $|E| = n$. By lemma 3,
+    $k = n$. 
+
+    Using Lemma 4, one can check if the placement stated before is valid.
+
+    \section*{Problem 5}
+    
+     
+    
+
 \end{document}
