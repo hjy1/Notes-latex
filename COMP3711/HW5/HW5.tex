@@ -57,6 +57,9 @@
     We claim that by greedily selecting the smallest available index at each itereation 
     respectively, one can achieve a minimum lexicographic ordering at the end.
     The modification will be replacing the queue in topological sorting with a min-heap. 
+
+    A min-heap insertion and extraction requires $O(\log |V|)$ time, therefore 
+    the total time complexty will be $O((|V| + |E|) \log |V|)$.
     \newpage
     \subsection*{Pseudocode}
     \begin{algorithm}
