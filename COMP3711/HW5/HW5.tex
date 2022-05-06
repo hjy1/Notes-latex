@@ -138,7 +138,7 @@
     $a's$ and $b's$. Notice that every capacity in the graph is an integer, so after only 
     performing addition and substraction operations in an maxflow algorithm, the flow in every
     edge must also be integral. Hence a used edge in $E$ means its flow is exactly one. 
-    For each pair $(a_i, b_j)$ in $E$, we will place the token on $M$ 
+    For each edge $(a_i, b_j)$ in $E$, we will place the token on $M$ 
     with axis $(i, j)$, row = $i$, col = $j$. 
     \newtheorem*{l1}{Lemma 1}
     \begin{l1}
@@ -168,7 +168,7 @@
     Since the out-degree of $s$ is $n$, the maximum flow $k \le n$.
     \newtheorem*{l4}{Lemma 4}
     \begin{l4}
-        Each row and each column of the grid has exactly on token if and only if $k = n$.
+        Each row and each column of the grid has exactly one token if and only if $k = n$.
     \end{l4}
     If $|E| = k = n$. Let $x_i$ be the number of tokens in row $i$. Since the total amount
     of tokens is $|E| = n$ by defintion, $\sum_{i=1}^n x_i = n$. By lemma 2, $x_i \le 1$,
@@ -196,7 +196,7 @@
 
     \begin{proof}
         Consider a BFS tree generated from $u$. We claim that there exists a layer $l$, 
-        $1 \le l < \frac{n}{2}$, such that this layer contains only one vertex. 
+        $1 \le l \le \floor{\frac{n}{2}}$, such that this layer contains only one vertex. 
         In another word, $D[x] = l$ has only one solution for $x$. Suppose not the case,
         then all the layers between 1 and $\floor{\frac{n}{2}}$ have at least 2 vertices, 
         altogether we have $\floor{\frac{n}{2}} \times 2 \ge n-1$ vertices. Adding $u$ and
