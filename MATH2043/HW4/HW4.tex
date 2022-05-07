@@ -4,6 +4,10 @@
 \usepackage[scale = 0.8]{geometry}
 \usepackage[shortlabels]{enumitem}
 \def\ve{\varepsilon}
+\def\floor#1{\lfloor{} #1 \rfloor{}}
+\def\abs#1{\left| #1 \right|}
+\def\slash{\backslash{}}
+\def\p{\partial}
 
 \begin{document}
     \section*{Problem 1}
@@ -84,5 +88,68 @@
         And since $\bigg|\frac{x^k}{k{(\log k)}^2}\bigg| \le \frac{1}{k{(\log k)}^2}$ for 
         $x \in [-1, 1]$, by Weiestrass' M-test, it converges uniformly on $[-1, 1]$.
     \end{enumerate}
+
+    \section*{Problem 4}
+    \begin{enumerate}[(a)]
+    
+    \item
+    \begin{align*}
+        \int_0^1 t^{x-1} e^{-t} dt &= \int_0^1 \sum_{n=0}^\infty 
+            \frac{{(-1)}^n t^{n+x-1}}{n!} dt
+    \end{align*}
+    Because $x > 1$ and $t \in [0, 1]$, 
+    \begin{align*}
+        \frac{{(-1)}^n t^{n+x-1}}{n!} &\le \frac{t^{n+x-1}}{n!} 
+        \le \frac{t^{n}}{n!} \le t^{n}
+    \end{align*}
+    and $\sum_{n=0}^\infty t^{n}$ converges. Therefore Weierstrass' M-test shows the 
+    series $\sum_{n=0}^\infty \frac{{(-1)}^n t^{n+x-1}}{n!}$ converges uniformly on 
+    $t \in [0, 1]$. So we can 
+    \begin{align*}
+        \int_0^1 t^{x-1} e^{-t} dt &=  \sum_{n=0}^\infty 
+            \int_0^1\frac{{(-1)}^n t^{n+x-1}}{n!} dt \\
+            &= \sum_{n=0}^n \frac{{(-1)}^n}{n! (x+n)}
+    \end{align*}
+
+    \item
+    Let $D := R \slash \bigcup_{n=0}^\infty(-n-\ve, -n+\ve)$ for any small $\ve > 0$.
+    Then for $x \in D$, $\abs{x+n} \ge \ve$ for any $n \in \mathbb{N}$.
+    \begin{align*}
+        \frac{{(-1)}^n}{n! (x+n)} &\le \frac{1}{n!\abs{x+n}} \\
+        &\le \frac{1}{n!\ve}
+    \end{align*}
+    By ratio test, $L = \lim_{n \to \infty} \frac{1}{n+1} = 0 < 1$, 
+    $\sum_{n=0}^\infty\frac{1}{n!\ve}$ converges. Then $g(x)$ converges uniformly on $D$.
+    Because $\sum_{n=0}^N \frac{{{(-1)}^n}}{n!(x+n)}$ is continuous for $N \in \mathbb{N}$, 
+    it defines a continuous function on $D$ for any $\ve$, hence it is also a continuous 
+    function on $\Omega$ as $\ve \to 0$.
+    \end{enumerate}
+
+    \section*{Problem 5}
+    Since $f(t, x)$ is $C^\infty, \frac{\p}{\p t} \frac{\p^k f}{\p x^k} (t, x)$ is 
+    continuous for any $(t, x) \in [0, T) \times [a,b]$ and any $k \in \mathbb{N} \cup \{0\}$.
+    For $p< q \in [T - \ve, T)$, $\forall \ve > 0$,
+    \begin{align*}
+        \abs{\frac{\p^k}{\p x^k}f(q, x) - \frac{\p^k}{\p x^k}f(p, x)} &= 
+            \abs{\int_p^q \frac{d}{dt} \frac{\p^k}{\p x^k}f(t, x) dt}\\
+            &\le \abs{q-p} C_k \le \ve C_k
+    \end{align*} 
+    Thus $g(x) = \lim_{t \to T^{-}} f(t,x)$ exists for every $x$ as it is the case for $k = 0$.
+    Since $f$ is continuous over all order derivatives, and $x$ it independent of $t$, we also have
+    \begin{align*}
+        \frac{d^k}{dx^k}g(x) &= \frac{d^k}{dx^k} \lim_{t \to T^-} f(t, x) \\
+            &= \lim_{t \to T^-} \frac{d^k}{dx^k} f(t, x)
+    \end{align*}
+    Hence for a fixed $k$, $\forall \ve > 0$, as $x \to x_0 \in [a, b], t \to T^-$,
+    \begin{align*}
+        \abs{\frac{d^k}{dx^k}g(x) - \frac{d^k}{dx^k} f(t, x)} &< \ve \\
+        \abs{\frac{d^k}{dx^k}g(x_0) - \frac{d^k}{dx^k} f(t, x_0)} &< \ve \\
+        \abs{\frac{d^k}{dx^k} f(t, x) - \frac{d^k}{dx^k} f(t, x_0)} &< \ve
+    \end{align*}
+    By triangular inequality, $\abs{\frac{d^k}{dx^k}g(x) - \frac{d^k}{dx^k}g(x_0)} < 3\ve$.
+    Thus $g(x)$ is $C^k$. Since it is true for any $k$, $g(x)$ is $C^\infty$.
+
+    \section*{Problem 6}
+    
     
 \end{document}
