@@ -134,7 +134,8 @@
             \abs{\int_p^q \frac{d}{dt} \frac{\p^k}{\p x^k}f(t, x) dt}\\
             &\le \abs{q-p} C_k \le \ve C_k
     \end{align*} 
-    Thus $g(x) = \lim_{t \to T^{-}} f(t,x)$ exists for every $x$ as it is the case for $k = 0$.
+    By cauchy condition,
+    $g(x) = \lim_{t \to T^{-}} f(t,x)$ exists for every $x$ as it is the case for $k = 0$.
     Since $f$ is continuous over all order derivatives, and $x$ it independent of $t$, we also have
     \begin{align*}
         \frac{d^k}{dx^k}g(x) &= \frac{d^k}{dx^k} \lim_{t \to T^-} f(t, x) \\
@@ -150,6 +151,63 @@
     Thus $g(x)$ is $C^k$. Since it is true for any $k$, $g(x)$ is $C^\infty$.
 
     \section*{Problem 6}
+    \begin{enumerate}[(a)]
+    \item
+
+    In order to show that $\bigcup_{n=1}^\infty S_n \supset C[0, 1] - E$, it suffices to 
+    show that fix $f \in C[0,1] - E$, $f \in \bigcup_{n=1}^\infty S_n$.
+    For $f \in C[0,1]-E$, there exist $x_0 \in [0,1]$ such that $f^\prime(x_0)$ exists. 
+    Let $g(x) = \frac{f(x) - f(x_0)}{x-x_0}$, therefore
+    \begin{align*}
+        \abs{\lim_{x \to x_0} g(x)} = L < +\infty
+    \end{align*}
+    So $\forall \ve > 0, \exists \delta(\ve) > 0 \text{ s.t. } |x-x_0| < \delta \implies 
+    L - \ve < g(x) < L + \ve$. So for $x \in [0,1], x \in (x_0 - \delta, x_0 + \delta) \slash {x_0}$, 
+    there exist $n \in \mathbb{N}$ such that $g(x) < L + \ve < n$. If $x = x_0$, then any 
+    $n > 0$ could satisfy.
+
+    Since $f$ is continuous on a closed interval, it is bounded, therefore $|f(x) - f(x_0)
+    |< M$ for some $M > 0$. So for $x \in [0,1], x \notin (x_0 - \delta, x_0 + \delta)$,
+    there also exist $n$ such that $g(x) < \frac{M}{\delta} < n$, where $n$ depends only
+    on $\delta$. Thus $f \in \bigcup_{n=1}^\infty S_n$
+
+    \item 
+    Let $f_k$ be a sequence in $S_n$ converging to some $f \in C[0,1]$. 
+    For each $k$, there exist $x_k$ such that for any $x \in [0,1]$,
+    \begin{align*}
+        \abs{\frac{f_k(x) - f_k(x_k)}{x - x_k}} \le n
+    \end{align*}
+    By Bolzano-Weiestrass theorem, $\{x_k\}$ has a subsequence converging to $x_\infty$.
+    extract the subsequence $\{x_{k_j}\}$ and $\{f_{k_j}\}$. we got 
+    \begin{align*}
+        \abs{\frac{f(x) - f(x_\infty)}{x-x_\infty}} &=
+            \lim_{j \to \infty} \abs{\frac{f_{k_j}(x) - f_{k_j}(x_{k_j})}{x - x_{k_j}}} \le n
+    \end{align*}
+    Thus $f \in S_n$ and thus $S_n$ is closed.
+
+    \item 
+    To show $S_n^o = \phi$, it suffices to show that $C[0,1] - S_n$ is dense. 
+    Let $f \in C[0,1]$.
+    Since $C[0,1]$ is compact, $f$ is uniformly continuous on $C[0,1]$, thus 
+    $\forall \ve > 0, \exists \delta > 0, \forall x, y \in [0, 1], 
+    |x - y| < \delta \implies |f(x) - f(y)| < \ve$.
+    Divide $[0,1]$ in to more than $\frac{1}{\delta}$ intervals $n$:
+    $[0, x_1], [x_1, x_2], \ldots [x_{n-1}, x_n]$ such that $\abs{x_i - x_{i+1}} < \delta$.
+    Define $g(x)$ to be $g(x_i) = f(x_i)$, $|g^\prime(x)| > n$ and $|g(x) - f(x)| < \ve / 2$.
+    We can make $g$ to be piecewise linear with absolute slope greater than $n$, 
+    and we can arbitrary change the slope sign so that the first and third condition can be satisfied.
+    (like a chainsaw).
+    Therefore $\left\| f - h\right\|_{C[0,1]}  \le \ve$, and $g \in C[0,1] - S_n$, thus it 
+    is dense and $S_n^o = \phi$.
+
+    \item 
+    According to Baire Category theorem, $\overline{C[0, 1] - \bigcup_{n=1}^\infty S_n} = C[0,1]$,
+    thus $C[0, 1] - \bigcup_{n=1}^\infty S_n$ is dense. since $C[0, 1] - \bigcup_{n=1}^\infty
+    S_n \subset E$ by (a), $E$ is also dense.
+
+    \end{enumerate}
+    
+    \section*{Problem 7}
     
     
 \end{document}
