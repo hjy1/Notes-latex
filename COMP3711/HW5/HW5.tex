@@ -68,7 +68,7 @@
     \begin{algorithm}
         \caption{Modified topological sorting}
         \begin{algorithmic}[1]
-            \State{Initialize H to be an empty heap}
+            \State{Initialize H to be an empty min-heap}
             \For{u in V}
                 \If{in-degree[u] = 0}
                     \State{add u to H}
@@ -104,8 +104,10 @@
     We have $i \neq j - 1$. This is obvious since the algorithm forces to find a neighbor 
     of current poing $v$, thus any adjacent points in $\{v_n\}$ are not the same. Let
     $t = v_{i+1}$. Split the tree by removing the edge $(s, t)$, we get two connected components:
-    $C_s$, $C_t$. Because there is no loop on a tree, $s$ and $t$ are disconnected. Thus to 
-    get back from $t$ to $s$, we can only take the edge $(t, s)$ again latter in the sequence.
+    $C_s$, $C_t$. Because there is no loop on a tree, $s$ and $t$ are disconnected after the split. 
+    Thus to 
+    get back from $C_t$ to $C_s$ later (since $s$ appears later in the sequence), 
+    we can only take the edge $(t, s)$ again later in the sequence.
     The movement from $s$ to $t$ indicates $|C_t| > |V| / 2$, and the 
     movement from $t$ to $s$ indicates $|C_s| > |V| / 2$. Therefore, $|C_s| + |C_t| > |V|$,
     but $|C_s| + |C_t| = |V|$ obviously and this incurs contradiction.
@@ -137,9 +139,11 @@
     We will also record $E$, the set of edges that has been used in the maxflow between 
     $a's$ and $b's$. Notice that every capacity in the graph is an integer, so after only 
     performing addition and substraction operations in an maxflow algorithm, the flow in every
-    edge must also be integral. Hence a used edge in $E$ means its flow is exactly one. 
+    edge must also be integral. Besides, all edge has flow capacity equals one, 
+    therefore a edge in $E$ is equivalent to its flow is exactly one. 
     For each edge $(a_i, b_j)$ in $E$, we will place the token on $M$ 
-    with axis $(i, j)$, row = $i$, col = $j$. 
+    with axis $(i, j)$, row = $i$, col = $j$. We will try to prove that this placement is 
+    valid when condition permits, and we can judge the condition.
     \newtheorem*{l1}{Lemma 1}
     \begin{l1}
         Every token is placed on a white cell.
@@ -200,7 +204,8 @@
         In another word, $D[x] = l$ has only one solution for $x$. Suppose not the case,
         then all the layers between 1 and $\floor{\frac{n}{2}}$ have at least 2 vertices, 
         altogether we have $\floor{\frac{n}{2}} \times 2 \ge n-1$ vertices. Adding $u$ and
-        $v$, we have at least $n+1$ vertices, contradiction. Thus let $x$ be the only
+        $v$, which is in layer 0 and layer greater than $\frac{n}{2}$,
+        we have at least $n+1$ vertices, contradiction. Thus let $x$ be the only
         solution of $D[x] = l$. By properties of BFS tree, all vetices layers less than $l$ 
         connect to layers larger than $l$ via $x$, otherwise there will be more vertices in 
         layer $l$. In conclusion, removing $x$ will result in removing all paths from 
