@@ -250,5 +250,31 @@
     Therefore $x_n(t)$ is also equicontinuous on $[0, \delta]$.
     By Arzela-Ascoli theorem, $\{x_n(t)\}_{n=1}^\infty$ has a converging subsequence.
 
+    \section*{Problem 8}
+    To prove that there exists a subsequence of $f$ that converges uniformly on every compact
+    sets $K \subset R$, it suffices to prove that this subsequence converges uniformly 
+    on $K_n = [-n, n]$ for any $n \in N$. Because any compact sets on $R$ is close and bounded,
+    so it will be a subset of $K_n$ for some $n$.
+
+    For $n = 1$, since $H(x), K(x)$ are a continuous funtions on a closed interval,
+    they are all bounded by $M_h(1), M_k(1)$. Thus $f_k(x), f_k^\prime(x)$ is uniformly bounded on 
+    $[-1, 1]$. According to exercise 4.21, $f_k(x)$ is equicontinuous on $[-1, 1]$. By 
+    Arzela Ascoli, there exist a subsequence $f_k^1(x)$ that converges uniformly on $[-1, 1]$.
+
+    For $n = 2$, consider only $f_k^1(x)$, which is still uniformly bounded and equicontinuous
+    on $[-2,2]$. Apply A-A again, and we get $f_k^2(x)$ that converges uniformly on $[-2, 2]$.
+
+    We proceed with $n \to \infty$. Then we extract $f_1^1, f_2^2, f_3^3, \ldots$ and we claim
+    that this sequence uniformly converges in $[-n, n]$ for any $n \in N$. 
+    
+    Explain:
+    For a specific $n$, omitting the former of the sequence, starting from $n$ : 
+    $f_n^n, f_{n+1}^{n+1} \ldots$. This forms a subsequence of $f_k^n$, thus it converges 
+    uniformly on $[-n, n]$. Hence this sequence uniformly converges on 
+    any compact set $K \subset R$.
+
+    For every $x \in R$, $x \in [-m, m]$ for some $m$, thus the sequence converges at $x$,
+    so it converges pointwise.
+
     
 \end{document}
