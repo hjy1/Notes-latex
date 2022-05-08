@@ -208,6 +208,47 @@
     \end{enumerate}
     
     \section*{Problem 7}
+    Let $k \le \frac{nt}{\delta}$ be the biggest $k$. Since $x_n$ is continuous in $[0, \delta]$,
+    \begin{align*}
+        x_n(t) - x_0 &= \sum_{j=0}^{k-1} \int_{\frac{j\delta}{n}}^{\frac{(j+1)\delta}{n}}
+            x_n^\prime(s)ds + \int_{\frac{k\delta}{n}}^{t} x_n^\prime(s)ds \\
+        &= \sum_{j=0}^{k-1} \int_{\frac{j\delta}{n}}^{\frac{(j+1)\delta}{n}}
+        F(x_n(\frac{j\delta}{n}))ds + \int_{\frac{k\delta}{n}}^{t} F(x_n(\frac{k\delta}{n}))ds \\
+        &= \sum_{j=0}^{k-1} \int_{\frac{j\delta}{n}}^{\frac{(j+1)\delta}{n}}
+        F(y_n(s))ds + \int_{\frac{k\delta}{n}}^{t} F(y_n(s))ds \\
+        &= \int_{0}^{t} F(y_n(s))ds \\
+    \end{align*}
+    We prove by induction to show that $|x_n(t)|$ is uniformly bounded by 
+    $\max\{|x_0+r|, |x_0-r|\}$, which is equivalent to say $\abs{x_n(t) - x_0} \le r$
+    for any $n\in \mathbb{N}, t \in [0, \delta]$.
+    Base case: $|x_n(0) - x_0| = 0 < r$.
+    Suppose for any $n \in \mathbb{N}$, $t \le \frac{j\delta}{n}$, we have 
+    $|x_n(t) - x_0| \le tM$. When $t \in (\frac{j\delta}{n}, \frac{(j+1)\delta}{n}]$,
+    we have 
+    \begin{align*}
+        x_n(t) &= x_n(\frac{j\delta}{n}) + (t - \frac{j\delta}{n}) F(x_n(\frac{j\delta}{n})) \\
+    \end{align*}
+    Since $M := \sup_{x \in [x_0 - r, x_0 + r]} |F(x)|$ and  
+    $\abs{x_n(\frac{j\delta}{n}) - x_0} \le \frac{j\delta}{n}M$
+     by hypothesis, $F(x_n(\frac{j\delta}{n})) \le M$. Then 
+    \begin{align*}
+        |x_n(t)-x_0| &= \abs{x_n(\frac{j\delta}{n}) + 
+                (t - \frac{j\delta}{n}) F(x_n(\frac{j\delta}{n})) - x_0} \\
+            &\le
+             \abs{x_n(\frac{j\delta}{n})-x_0} + \abs{F(x_n(\frac{j\delta}{n})) 
+                (t - \frac{j\delta}{n})} \\
+            &\le \frac{j\delta}{n}M + M(t - \frac{j\delta}{n}) = tM
+    \end{align*}
+    So $x_n(t)$ is uniformly bounded.
     
+    By the proof above, $F(x_n(\frac{j\delta}{n})) \le M$ for any $j=1,2,\ldots,n-1$, 
+    therefore $|x_n^\prime(t)|$ is bounded by $M$. Hence for any $\ve > 0$, there exists 
+    $c = \frac{\ve}{2M}$ such that whenever $t, s \in [0, \delta]$ and $|t-s| < c$, then
+    \begin{align*}
+        \abs{x_n(t) - x_n(s)} \le M |t-s| = \ve / 2 < \ve
+    \end{align*}
+    Therefore $x_n(t)$ is also equicontinuous on $[0, \delta]$.
+    By Arzela-Ascoli theorem, $\{x_n(t)\}_{n=1}^\infty$ has a converging subsequence.
+
     
 \end{document}
