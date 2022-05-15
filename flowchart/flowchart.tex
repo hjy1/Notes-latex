@@ -1,7 +1,7 @@
 \documentclass[border = 1cm, a4paper]{standalone}
 
 \usepackage{tikz}
-\usetikzlibrary{shapes, arrows.meta, positioning}
+\usetikzlibrary{shapes, arrows.meta, positioning, external}
 
 \begin{document}
 
@@ -69,7 +69,7 @@
 
 \node[draw,
     diamond,
-    below right=of mainloop,
+    below right=0.7 cm and 5cm of mainloop,
     minimum width=2.5cm,
     inner sep=0] (check) {Win?};
 
@@ -78,14 +78,14 @@
     below right = of check,
     minimum width=3.5cm,
     minimum height=1cm,
-    inner sep=0] (win) {Show win text and cease};
+    inner sep=0] (win) {Show win};
 
 \node[draw,
     align = center,
     below left = of check,
     minimum width=3.5cm,
     minimum height=1cm,
-    inner sep=0] (lose) {Show lose text and cease};
+    inner sep=0] (lose) {Show lose};
 
 \draw[-latex] (start) edge (initial)
     (initial) edge (mainloop)
@@ -93,15 +93,16 @@
     (player) edge (platform)
     (platform) edge (hurtR)
     (hurtR) edge (UsPB)
-    (UsPB) edge (nap)
+    (UsPB) edge (nap);
 \draw[-latex] (check) -| (win)
-    node[pos=0.25,fill=white,inner sep=0]{Yes}
-    (check) |- (lose)
-    node[pos=0.25,fill=white,inner sep=0]{No};
-
-
-    
-   
+	node[pos=0.25,fill=white,inner sep=0.2cm]{Yes};
+\draw[-latex] (check) -| (lose)
+	node[pos=0.25,fill=white,inner sep=0.2cm]{No};
+\draw[-latex] (mainloop) -| (check)
+    node[pos=0.25,fill=white,inner sep=0.2cm]{Yes};
+\draw[-latex] (mainloop) -| (get_time)
+    node[pos=0.25,fill=white,inner sep=0.2cm]{No};
+\draw[-latex] (nap) -| (mainloop);
  
 \end{tikzpicture}
 
