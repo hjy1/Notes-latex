@@ -10,14 +10,14 @@
 \node[draw,
     rounded rectangle,
     minimum width = 2.5cm,
-    minimum height = 1cm] (start){start};
+    minimum height = 1cm] (start){START};
 
 \node[draw,
     align=center,
     below=of start,
     minimum width=3.5cm,
     minimum height=1cm
-] (initial) { Initialize Game};
+] (initial) {Initialize Game (player, initial platforms)};
 
 \node[draw,
     diamond,
@@ -35,9 +35,17 @@
 \node[draw,
     align = center,
     below = of get_time,
-    minimum width=3.5cm,
-    minimum height=1cm,
-    inner sep=0] (player) {Move player by input};
+    minimum width=6.0cm,
+    minimum height=2.0cm,
+    inner sep=0] (player) {Move player\\ prerequisite: 
+                        On a platform; \\ In parallel:
+                        Update player status \\
+                        according to platform types
+                        };
+\node[draw,
+    diamond,
+    below right = of player,
+    inner sep=0] (On) {On a platform? }
     
 \node[draw,
     align = center,
@@ -49,9 +57,11 @@
 \node[draw,
     align = center,
     below = of platform,
-    minimum width=3.5cm,
-    minimum height=1cm,
-    inner sep=0] (hurtR) {hurt recover};
+    minimum width=5.0cm,
+    minimum height=2cm,
+    inner sep=0] (hurtR) {Hurt recover: \\
+                        recover from hurting \\
+                        status after 3 seconds};
 
 \node[draw,
     align = center,
@@ -65,7 +75,7 @@
     below = of UsPB,
     minimum width=3.5cm,
     minimum height=1cm,
-    inner sep=0] (nap) {Refresh and have a nap};
+    inner sep=0] (nap) {Refresh \& nap};
 
 \node[draw,
     diamond,
@@ -78,14 +88,14 @@
     below right = of check,
     minimum width=3.5cm,
     minimum height=1cm,
-    inner sep=0] (win) {Show win};
+    inner sep=0] (win) {Win procedure};
 
 \node[draw,
     align = center,
     below left = of check,
     minimum width=3.5cm,
     minimum height=1cm,
-    inner sep=0] (lose) {Show lose};
+    inner sep=0] (lose) {Lose procedure};
 
 \draw[-latex] (start) edge (initial)
     (initial) edge (mainloop)
