@@ -1,19 +1,22 @@
 \documentclass[a4paper]{report}
 
 \usepackage{amsfonts, amsmath}
+\usepackage{enumitem}
+\def\ve{\varepsilon}
+\newcommand{\mcal}[1]{\mathcal{#1}}
 
 \begin{document}
 
 \section*{Problem 1}
 We define the sequence of partitions ${\{P_k\}}_{k=1}^\infty$ as following. 
-\begin{align*}
+\begin{align}
     \delta &:= \frac{1}{2^{k+2}}, x_i = \frac{1}{i}, i \in N\\
     P_k &:= \left\{x_1=1, x_1-\delta, x_2+\delta, x_2-\delta,x_3+\delta,
     x_3-\delta,\ldots,x_k+\delta, x_k-\delta,0\right\},
     k \in \mathbb{N}
-\end{align*}
+\end{align}
 Then for a particular partition $P_k$, we have 
-\begin{align*}
+\begin{align}
     U(f, P) &= \sum_{i=1}^{k-1} \sup_{x\in [x_{i+1}+\delta, x_i-\delta]}1/[1/x]
             (x_i-x_{i+1} - 2\delta) + \\
         &\sum_{i=2}^k \sup_{x\in [x_i-\delta, x_i+\delta]} 1/[1/x]2\delta\\
@@ -25,9 +28,9 @@ Then for a particular partition $P_k$, we have
             x_{k+1}(x_k-\delta) \\
         &= \sum_{i=1}^{k-1} \frac{1}{i^2} - 1 + \frac{1}{k}+\delta+
         x_{k+1}(x_k-\delta)
-\end{align*}
+\end{align}
 and
-\begin{align*}
+\begin{align}
     L(f, P) &= \sum_{i=1}^{k-1} \inf_{x\in [x_{i+1}+\delta, x_i-\delta]}1/[1/x]
             (x_i-x_{i+1} - 2\delta) + \\
         &\sum_{i=2}^k \inf_{x\in [x_i-\delta, x_i+\delta]} 1/[1/x]2\delta\\
@@ -38,9 +41,61 @@ and
         &= \sum_{i=1}^{k-1} \left(\frac{1}{i^2} -\frac{1}{i}+\frac{1}{i+1}\right)+2\delta
         (x_k-1)+\delta \\
         &= \sum_{i=1}^{k-1} \frac{1}{i^2}-1+\frac{1}{k}+2\delta(x_k-1) + \delta
-\end{align*}
+\end{align}
 Since $\sum_{i=1}^\infty \frac{1}{i^2} = \frac{\pi^2}{6}$, Letting $k \to \infty$ and we got 
-\begin{align*}
+\begin{align}
     L(f, P_k) = \frac{\pi^2}{6}-1= U(f, P_k)
-\end{align*}
+\end{align}
+
+\section*{Problem 2}
+
+\begin{enumerate}[label=(\alph*)]
+
+\item 
+Since $f_n$ converges uniformly to $f$, $\forall \ve > 0 \exists N > 0 \text{ s.t. } n \ge
+N \implies \forall x \in [a,b], |f(x) - f_n(x)| < \frac{\ve}{3(b-a)}$. So that given a 
+partition $P = \{x_0=a, x_1, \ldots, x_k = b\}$ we have 
+\begin{align}
+    |U(f, P) - U(f_n, P)| &= \sum_{i=1}^k \left|\sup_{x\in [x_{i-1}, x_i]} f(x)-\sup_{x\in 
+        [x_{i-1}, x_i]} f_n(x) \right| (x_i - x_{i-1}) \\
+    |L(f, P) - L(f_n, P)| &= \sum_{i=1}^k \left|\inf_{x\in [x_{i-1}, x_i]} f(x)-\inf_{x\in 
+        [x_{i-1}, x_i]} f_n(x) \right| (x_i - x_{i-1})
+\end{align}
+Since 
+\begin{align}
+    \sup f(x) &\le \sup (f(x) - f_n(x)) + \sup f_n(x) < \frac{\ve}{3(b-a)}+\sup f_n(x) \\
+    \inf f(x) &\ge \inf (f(x) - f_n(x)) + \inf f_n(x) > -\frac{\ve}{3(b-a)}+\inf f_n(x)
+\end{align}
+we have 
+\begin{align}
+    |U(f, P) - U(f_n, P)| &< \sum_{i=1}^k \frac{\ve}{3(b-a)} (x_i - x_{i-1}) = \ve / 3 \\
+    |L(f, P) - L(f_n, P)| &< \sum_{i=1}^k \frac{\ve}{3(b-a)} (x_i - x_{i-1}) = \ve / 3
+\end{align}
+Since $f_n$ is Riemann integrable, by 5.6(iii), for any partition $P$ we have 
+$|U(f_n, P) - L(f_n, P)| < \ve / 3$. Combine it with (20), (21) and apply triangular 
+inequality, we conclude that $f$ is Riemann integrable by 5.6(iii).
+
+\item
+
+Suppose $f_n$ is continuous at $x_0 \in [a, b]$ for any $n \in \mathbb{N}$. Then $\forall 
+\ve > 0, \exists \delta(n) > 0$ such that $|x - x_0| < \delta \implies |f_n(x) - f_n(x_0)|
+< \ve / 3$. Since $f_n$ converges uniformly to $f$, if $n$ is sufficiently large,
+we have $\forall x \in [a,b], |f(x) - f_n(x)| < \ve / 3$. Then $\forall \ve > 0$, we could 
+find $\delta(n)$ with sufficiently large $n$, such that if $|x - x_0| < \delta(n)$, 
+\begin{align}
+    |f(x)-f(x_0)| \le |f(x) - f_n(x)| + |f_n(x) - f_n(x_0)| + |f_n(x_0) - f(x_0)| < \ve
+\end{align}
+Then $f$ is also continuous at $x_0$. Hence $\bigcap_{i=1}^\infty D_{f_i}^c \subset D_f^C$.
+Therefore $D_f \subset \bigcup_{i=1}^\infty D_{f_i}$, and 
+\begin{align}
+    \mcal{L}^*(D_f) \le \mcal{L}^*\left(\bigcup_{i=1}^\infty D_{f_i}\right) \le 
+    \sum_{i=1}^\infty \mcal{L}^* ({D_{f_i}})
+\end{align}
+By Lebesgue theorem, $\mcal{L}^* ({D_{f_i}}) = 0$ for $i \in \mathbb{N}$, therefore 
+$\mcal{L}^* (D_f) = 0$ and hence $f$ is Riemann integrable.
+
+\end{enumerate}
+
+\section*{Problem 3}
+
 \end{document}
