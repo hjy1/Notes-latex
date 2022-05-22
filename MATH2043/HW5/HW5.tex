@@ -5,6 +5,42 @@
 \begin{document}
 
 \section*{Problem 1}
-Since $[1/x]$ is the largest integer 
-
+We define the sequence of partitions ${\{P_k\}}_{k=1}^\infty$ as following. 
+\begin{align*}
+    \delta &:= \frac{1}{2^{k+2}}, x_i = \frac{1}{i}, i \in N\\
+    P_k &:= \left\{x_1=1, x_1-\delta, x_2+\delta, x_2-\delta,x_3+\delta,
+    x_3-\delta,\ldots,x_k+\delta, x_k-\delta,0\right\},
+    k \in \mathbb{N}
+\end{align*}
+Then for a particular partition $P_k$, we have 
+\begin{align*}
+    U(f, P) &= \sum_{i=1}^{k-1} \sup_{x\in [x_{i+1}+\delta, x_i-\delta]}1/[1/x]
+            (x_i-x_{i+1} - 2\delta) + \\
+        &\sum_{i=2}^k \sup_{x\in [x_i-\delta, x_i+\delta]} 1/[1/x]2\delta\\
+        &+ \sup_{x\in [1-\delta,1]}1/[1/x]\delta
+        + \sup_{x\in [0, x_k - \delta]}1/[1/x](x_k-\delta)\\
+        &= \sum_{i=1}^{k-1} x_i (x_i-x_{i+1} - 2\delta)+2\delta\sum_{i=2}^k x_{i-1}+\delta
+            +x_{k+1}(x_k-\delta) \\
+        &= \sum_{i=1}^{k-1} \left(\frac{1}{i^2} -\frac{1}{i}+\frac{1}{i+1}\right)+\delta+
+            x_{k+1}(x_k-\delta) \\
+        &= \sum_{i=1}^{k-1} \frac{1}{i^2} - 1 + \frac{1}{k}+\delta+
+        x_{k+1}(x_k-\delta)
+\end{align*}
+and
+\begin{align*}
+    L(f, P) &= \sum_{i=1}^{k-1} \inf_{x\in [x_{i+1}+\delta, x_i-\delta]}1/[1/x]
+            (x_i-x_{i+1} - 2\delta) + \\
+        &\sum_{i=2}^k \inf_{x\in [x_i-\delta, x_i+\delta]} 1/[1/x]2\delta\\
+        &+ \inf_{x\in [1-\delta,1]}1/[1/x]\delta
+        + \inf_{x\in [0, x_k - \delta]}1/[1/x](x_k-\delta)\\
+        &= \sum_{i=1}^{k-1} x_i (x_i-x_{i+1} - 2\delta)+2\delta\sum_{i=2}^k x_i+\delta
+            +0\\
+        &= \sum_{i=1}^{k-1} \left(\frac{1}{i^2} -\frac{1}{i}+\frac{1}{i+1}\right)+2\delta
+        (x_k-1)+\delta \\
+        &= \sum_{i=1}^{k-1} \frac{1}{i^2}-1+\frac{1}{k}+2\delta(x_k-1) + \delta
+\end{align*}
+Since $\sum_{i=1}^\infty \frac{1}{i^2} = \frac{\pi^2}{6}$, Letting $k \to \infty$ and we got 
+\begin{align*}
+    L(f, P_k) = \frac{\pi^2}{6}-1= U(f, P_k)
+\end{align*}
 \end{document}
