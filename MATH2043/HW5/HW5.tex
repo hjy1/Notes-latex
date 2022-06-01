@@ -2,6 +2,7 @@
 
 \usepackage{amsfonts, amsmath}
 \usepackage{enumitem}
+\usepackage[scale = 0.8]{geometry}
 \def\ve{\varepsilon}
 \newcommand{\mcal}[1]{\mathcal{#1}}
 
@@ -49,7 +50,7 @@ Since $\sum_{i=1}^\infty \frac{1}{i^2} = \frac{\pi^2}{6}$, Letting $k \to \infty
 
 \section*{Problem 2}
 
-\begin{enumerate}[label=(\alph*)]
+\begin{enumerate}[label= (\alph*)]
 
 \item 
 Since $f_n$ converges uniformly to $f$, $\forall \ve > 0 \exists N > 0 \text{ s.t. } n \ge
@@ -99,8 +100,154 @@ $\mcal{L}^* (D_f) = 0$ and hence $f$ is Riemann integrable.
 \section*{Problem 3}
 \begin{enumerate}[label = (\alph*)]
 
+\item Since $\phi$ is continuous on $\mathbb{R}$, $\forall \ve > 0, \exists \delta > 0 
+\text{ s.t. } |p - q| < \delta \implies |\phi(p) - \phi(q)| < \ve$. Since $f$ is Riemann
+integrable, there exist a partition $P = {\{x_i\}}_{i=1}^n$ of $[a, b]$ such that $U(f, P) 
+-L(f, P) < \ve\delta$. Thus 
+\begin{align}
+    \sum_{i=1}^n \left({(\sup - \inf)}_{[x_{i-1}, x_i]} f\right) 
+    (x_i - x_{i-1}) < \ve \delta
+\end{align}
+For $\phi \circ f$, we have
+\begin{align}
+    U(\phi\circ f, ) - L(\phi \circ f, P) &= 
+    \sum_{i=1}^n \left(\sup_{[x_{i-1}, x_i]}\phi\circ f - \inf_{[x_{i-1}, x_i]}
+        \phi\circ f\right) (x_i - x_{i-1}) \\
+        &=\sum_{i: {(\sup - \inf)}_{[x_{i-1}, x_i]} f < \delta / 2} \\
+        &\left(\sup_{[x_{i-1}, x_i]}\phi\circ f - \inf_{[x_{i-1}, x_i]}
+        \phi\circ f\right) (x_i - x_{i-1})\\ &+ 
+        \sum_{i: {(\sup - \inf)}_{[x_{i-1}, x_i]} f \ge \delta / 2} \\
+        &\left(\sup_{[x_{i-1}, x_i]}\phi\circ f - \inf_{[x_{i-1}, x_i]}
+        \phi\circ f\right) (x_i - x_{i-1})
+\end{align}
+For the first branch, we have $|f(x) - f(y)| < \delta/2$ for any $x, y \in [x_{i-1}, x_i]$.
+Since $\phi$ is continuous, we have $|\phi(f(x)) - \phi(f(y))| < \ve$ and thus 
+\begin{align}
+    \left(\sup_{[x_{i-1}, x_i]}\phi\circ f - \inf_{[x_{i-1}, x_i]}
+        \phi\circ f\right) \le \ve
+\end{align}
+For the next branch, Since
+\begin{align}
+    \sum_{i \in Branch2} \frac{\delta}{2} (x_i - x_{i-1}) \le \sum_{i=1}^n 
+    \left({(\sup - \inf)}_{[x_{i-1}, x_i]} f\right) 
+    (x_i - x_{i-1}) < \ve \delta
+\end{align}
+we have $\sum_{i \in Branch2} (x_i - x_{i-1}) < \ve \delta \frac{2}{\delta} = 2\ve$ thus 
+\begin{align*}
+    \sum_{i \in Branch2} \left(\sup_{[x_{i-1}, x_i]}\phi\circ f - \inf_{[x_{i-1}, x_i]}
+    \phi\circ f\right) (x_i - x_{i-1})\\ < 2\ve {(\sup-\inf)}_{[a,b]} \phi \circ f
+\end{align*}
+
+Since $f$ is bounded, there exist $M$ such that $f[a, b] \subset [-M, M]$. Since $\phi$ is
+continuous and the compactness of $[-M, M]$, $\phi \circ f$ is also bounded and therefore 
+${(\sup-\inf)}_{[a,b]} \phi \circ f$ is a constant. Adding up the two branches and we got 
+$\phi \circ f$ is Riemann integrable by 5.6(iii).
+
 \item 
+If $f$ is continuous at $x_0 \in [a,b]$, then $\phi \circ f$ is alsoe continuous at $x_0$ 
+thus 
+\begin{align}
+    D_f^c \subset D_{\phi\circ f}^c \implies D_{\phi\circ f} \subset D_f
+\end{align}
+Since $\mcal{L}^*(D_f) = 0$, we have $\mathcal{L}^*(D_{\phi\circ f}) = 0$ as well, so 
+it is Riemann integrable.
 
 \end{enumerate}
+
+\section*{Problem 4}
+\begin{enumerate}[label = (\alph*)]
+\item 
+Let $E_n = E \cap [-n, n], n \in N$. Then $\mcal{L}^* (E_n) = 0$ as well. Give $\ve > 0$, Let 
+$E_n \subset \bigcup_{i=1}^\infty (a_i, b_i), a_i \le b_i$ and $\sum_{i=1}^\infty |a_i - b_i|
+\le \frac{\ve}{2^n(2n+1)}$. Let $c_i = \min(a_i, b_i), d_i = \max(a_i, b_i)$. 
+So $E_n^2 =  \subset \bigcup_{i=1}^\infty (c_i, d_i)$, and
+\begin{align*}
+    \mcal{L}^*(E_n^2) &= 
+    \sum_{i=1}^\infty (d_i - c_i)\\ &= \sum_{i=1}^\infty (a_i+b_i)(b_i-a_i) \\
+        &< (2n+1)\sum_{i=1}^\infty (b_i-a_i) \le \ve/2^n
+\end{align*}
+We can verify that $E_n^2 = E^2 \cap [-n^2, n^2]$, therefore
+\begin{align*}
+    \mcal{L}^*(E^2) &= \mcal{L}^* \left(\bigcup_{n=1}^\infty E^2 \cap [-n^2, n^2]\right) \\
+        &\le \sum_{n=1}^\infty \mcal{L}^*(E_n) < 2\ve
+\end{align*}
+Let $\ve \to 0^+$ and done.
+
+\item 
+If $g$ is not continuous at $x_0$, then since $\sqrt{x}$ is continuous on $[0,1]$, $f$ 
+must be discontinuous at $\sqrt{x_0}$. Therefore $D_g \subset D_f^2$.By (a), we have 
+\begin{align*}
+    \mcal{L}^*(D_g) \le \mcal{L}^*(D_f^2) = 0
+\end{align*}
+By Lebesgue theorem, $g$ is Riemann integrable on $[0,1]$.
+
+\end{enumerate}
+
+\section*{Problem 5}
+Only if: 
+
+Let $\ve > 0$.  Since f is Riemann integrable, there is a partition $P$ such that 
+$U(f, P) - L(f, P) < \ve/k$. Let $x_0, x_1, \ldots, x_n$ be the points of partition $P$.
+Define a set of indexes $I$ such that for $i \in I, \Omega_k \cap [x_{i-1}, x_i] \neq\phi$.
+Then we have $\Omega_k \subset \bigcup_{i \in I} [x_{i-1},x_i]$.
+Let $\delta = (x_i - x_{i-1})/2$, then we have 
+\begin{align*}
+    [x_{i-1}, x_i] &\subset (x_{i-1}-\delta, x_i+\delta) \\
+    \Omega_k &\subset \bigcup_{i \in I} (x_{i-1}-\delta, x_i + \delta)
+\end{align*}
+And the length of this cover is $2\sum_{i \in I} (x_i - x_{i-1})$.
+
+By the definition of $\Omega_k, \sup_{x, y \in [x_{i-1}, x_i]} |f(x) - f(y)| \ge 1/k$, if 
+$\Omega_k \cap [x_{i-1}, x_i] \neq\phi$. Thus
+\begin{align*}
+    \sup_{[x_{i-1}, x_i]} f - \inf_{[x_{i-1}, x_i]} f \ge 1/k
+\end{align*}
+And
+\begin{align*}
+    \frac{2}{k}\sum_{i \in I} (x_i - x_{i-1}) &\le 2\sum_{i \in I} 
+    \left(\sup_{[x_{i-1}, x_i]} f - \inf_{[x_{i-1}, x_i]} f\right)(x_i-x_{i-1}) \\
+    &\le 2(U(f, P) - L(f, P)) < 2\ve/k
+\end{align*}
+Let $\ve \to 0^+$ and the length of the cover towards zero. Hence $\mcal{L}^*(\Omega) = 0$.
+By 5.1, $\mcal{L}^*(D_f) = 0$.
+
+If:
+
+(b):
+
+By prop 2.27, $C = \bigcup_{n=1}^\infty (\alpha_n, \beta_n)$ is open. Therefore $T = \mathbb{R} -
+\bigcup_{n=1}^\infty (\alpha_n, \beta_n)$ is closed. Hence $K = T \cap [a,b]$ is closed and 
+bounded. Therefore it is compact, and $f$ is uniform continuous on $K$ if it is continuous.
+
+(c):
+If $D_f$ has lebesgue 0, then we cover every point in $D_f$ by the small open cover. 
+Since $f$ is continuous on $R - D_f$, by (b), $f$ is further uniformly continuous on $K$.
+Therefore for $\ve > 0$, there exist $\delta$ such that $\forall x_0 \in K, |x-x_0| < \delta 
+\implies |f(x)-f(x_0)| < \ve$. 
+
+Define $J_x = \{y: |x - y| <\delta$, obviously $\bigcup_{x \in K} J_x$ is an open cover 
+of $K$. By compactness of $K$, we conclude that there is a finite subcover such that 
+\begin{align*}
+    K \subset \bigcup_{x=x_1}^{x_m} J_{x}
+\end{align*}
+Sort all the endpoints of these finite subcovers and $a, b$, we shall form a partition $P$. 
+
+
+If $[x_{i-1}, x_i] \cap K = \phi$, then it is totally inside the $C$. The sum of its length
+is bounded by $\ve$ since the measure is zero. Since $f$ is bounded, therefore 
+$(\sup_{[x_{i-1}, x_i]} f - \inf_{[x_{i-1}, x_i]} f) < M$ for some fied $M$.
+
+If $[x_{i-1}, x_i] \cap K \neq \phi$, notice that no endpoints $x_j \in (x_{i-1}, x_i)$ for 
+any $j \in [1,2,\ldots, m]$. Thus there exist $j \in [1,2,\ldots, m]$ such that $(x_{i-1}, x_i)
+\subset [x_j - \delta, x_j + \delta]$.
+then it is uniformly continuous and therefore $\sup_{[x_{i-1}, x_i]} f - 
+\inf_{[x_{i-1}, x_i]} f < \ve$.
+\begin{align*}
+    U(f, P) - L(f, P) &= \sum_{case 1} (\sup_{[x_{i-1}, x_i]} f - \inf_{[x_{i-1}, x_i]} f)
+        (x_i - x_{i-1}) + 
+        \sum_{case 2 } (\sup_{[x_{i-1}, x_i]} f - \inf_{[x_{i-1}, x_i]} f) (x_i - x_{i-1}) \\
+        &\le M\ve + \ve (b-a)
+\end{align*}
+Hence it is Riemann integrable.
 
 \end{document}
