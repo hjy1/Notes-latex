@@ -1,4 +1,4 @@
-\documentclass[]{article}
+\documentclass[]{report}
 
 \usepackage[]{graphicx}
 \usepackage[]{blindtext}
@@ -6,7 +6,10 @@
 \usepackage[]{amsmath, amsfonts, amsthm}
 \usepackage[]{enumitem}
 \usepackage[]{minted}
+\usepackage[]{indentfirst}
 
+\renewcommand{\sec}[1]{\section{#1}}
+\newcommand{\subsec}[1]{\subsection*{#1}}
 \newcommand{\bb}[1]{\mathbb{#1}}
 \newcommand{\Cal}[1]{\mathcal{#1}}
 
