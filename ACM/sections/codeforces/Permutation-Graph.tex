@@ -26,7 +26,17 @@ since the distance to $n$ increases, adding constraints. This approach can be pr
 and the implementation is $O(n\log n)$ interval minimum/maximum. 
 Nevertheless, establishing the greedy will lead to a $O(n)$ algorithm. 
 
-There is a lemma.
+Suppose $a_i = 1, a_j = n$, WLOG assume $i < j$. Partition the array into three sets:
+$S_1 = [1, \ldots, i-1], S_2 = [i+1, \ldots, j-1], S_3 = [j+1, \ldots, n]$ 
+(allowing intervals to be empty).
+We notice that there should be no edge from between these three sets, since $a_i, a_j$ are
+the extreme values in the permutation. Therefore for reaching $n$ from $1$, one must bypass
+$i, j$. The jump from $i$ to $j$ takes one step, and the remainings can be solved recursively.
+
+By the same sub-structure of the problem, the strategy of consistent heading right is obviously 
+correct. The divide-and-conquer implementation takes $O(n)$.
+
+
 
 
 \end{document}
