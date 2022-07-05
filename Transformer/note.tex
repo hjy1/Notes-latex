@@ -1,0 +1,39 @@
+\documentclass[]{article}
+
+\usepackage[]{enumitem}
+\usepackage[]{minted}
+
+\begin{document}
+    \section{Inductive Bias} 
+        less for transformer
+    \section{Weight Reuse and Sharing}
+        \begin{enumerate}
+            \item FC 
+            \item Conv: Sharing in space.
+                Differs when rotating. so rand-rotating req  
+            \item Recurrent: Sharing in time. ``Hidden state''
+            
+        \end{enumerate}
+    \section{transformer}
+        \subsection{tokenize}
+            token set? not exhaustive \\
+            character set, not enough\\
+            subword :bert: word piece, by pair encoding
+        \subsection[]{encoder} 
+            Position encoding
+            embedding in context: transformer encoding.
+        \subsection[]{decoder}
+            masked: cannot foresee.
+            Query: from encoder to decoder.
+            project 
+        \subsection[]{add\&normalize}
+            prenorm (we get it, stable) / postnorm (warmup)
+    \section{VIT:Vision transformer}
+        Patch, linear projection (conv, lol) \\
+        class token -> transformer encoder -> MLP head (prenorm) \\ 
+    \section[]{attention}
+        B C H W -> B C N -> B N C -> B N 3C (qkv) -> 3 B N C D \\
+        B H N D -> B H N N -> scale $\frac{1}{\sqrt[]{h}}$
+    
+    
+\end{document}
