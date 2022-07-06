@@ -20,12 +20,13 @@
 
 \AtBeginSection[]
 {
-\begin{frame}<beamer>
-\frametitle{Outline}
-\tableofcontents[
-  currentsection
-]
-\end{frame}
+    \begin{frame}<beamer>
+        \frametitle{Outline}
+        \tableofcontents[
+            currentsection,
+            subsectionstyle=show/hide,
+        ]
+    \end{frame}
 }
 
 \begin{document}
@@ -238,6 +239,17 @@
     \end{columns}    
 \end{frame}
 
+\section{VIT}
+\begin{frame}
+    \frametitle{VIT}
+    \begin{itemize}
+        \item VIT\: Vision Transformer
+        \item Split images into fixed-size patches
+    \end{itemize}
+    \centering
+    \includegraphics[scale = 0.4]{model_scheme.pdf}
+\end{frame}
+
 \section{Medical-Related}
 \begin{frame}
     \frametitle{Medical-Related}
@@ -251,7 +263,12 @@
 \subsection{Multi-scale Self-guided Attention}
 \begin{frame}
     \frametitle{Multi-scale Self-guided Attention}
+\end{frame}
 
+\section{GNN}
+\subsection{Inductive Bias}
+\begin{frame}
+    \frametitle{Inductive Bias}
 \end{frame}
 
 \end{document}
