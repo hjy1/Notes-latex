@@ -223,7 +223,8 @@
         p_{pos,2i} &= \sin \Bigl(\frac{i}{10000^{2i/d}}\Bigr) \\
         p_{pos,2i+1} &= \cos \Bigl(\frac{i}{10000^{2i/d}}\Bigr)
     \end{align*}
-    Make $PE$ be \emph{unique} and \emph{consistent} on space.
+    $n$\: length of sequence; $d$\: length of encoding. \\
+    Give each position-embedding pair a \emph{unique} value.
 \end{frame}
 
 \subsection{Recap}
@@ -231,10 +232,14 @@
     \frametitle{Recap}
     \begin{columns}
         \begin{column}[]{0.5\textwidth}
-            \includegraphics[scale = 0.4]{ModalNet-21.png}
+            \begin{figure}[r]
+                \includegraphics[scale = 0.4]{ModalNet-21.png}
+            \end{figure}
         \end{column}
         \begin{column}[]{0.5\textwidth}
-            \includegraphics[scale = 0.6]{ModalNet-19.png}
+            \begin{figure}[r]
+                \includegraphics[scale = 0.6]{ModalNet-19.png}
+            \end{figure}
         \end{column}
     \end{columns}    
 \end{frame}
@@ -251,24 +256,34 @@
 \end{frame}
 
 \section{Medical-Related}
-\begin{frame}
-    \frametitle{Medical-Related}
-\end{frame}
 
 \subsection{Attention UNet}
 \begin{frame}
     \frametitle{Attention UNet}
+    \begin{figure}
+        \centering
+        \includegraphics[scale = 0.7]{figure4.pdf}
+    \end{figure}
+    \begin{align*}
+        Concat(Attention, upsample)
+    \end{align*}
 \end{frame}
-
-\subsection{Multi-scale Self-guided Attention}
 \begin{frame}
-    \frametitle{Multi-scale Self-guided Attention}
+    \frametitle{Attention Unet}
+    \begin{figure}
+        \centering
+        \includegraphics[scale = 0.9]{figure3.pdf}
+    \end{figure}
+    Using \emph{query $g$}  from a coarser scale to provide attention scoring function.
+    Trilinear interpolation is applied.
 \end{frame}
 
-\section{GNN}
+\section{Conclusion}
 \subsection{Inductive Bias}
 \begin{frame}
     \frametitle{Inductive Bias}
+    \includegraphics[scale = 0.25]{inductive-bias.png}
+    From GNN\@.
 \end{frame}
 
 \end{document}
