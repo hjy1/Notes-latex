@@ -1,7 +1,7 @@
 \documentclass[]{beamer}
 
 \usepackage[]{graphicx}
-\usepackage[]{minted}
+%\usepackage[]{minted}
 \usepackage[]{enumitem}
 
 \usetheme[]{Madrid}
@@ -13,6 +13,17 @@
 \title[]{Attention}
 \author{HE Jiayou}
 \date{\today}
+
+\usepackage[backend=biber, style=numeric-comp, sorting=none]{biblatex}
+
+\usepackage[]{hyperref}
+\hypersetup{
+    colorlinks=true,
+}
+
+\addbibresource{refs.bib}
+\setbeamerfont{footnote}{size=\tiny} %reduce the size of the footnote citation
+\setbeamertemplate{bibliography item}{\insertbiblabel}  % Add numbered list of references in the end
 
 \newcommand{\bb}[1]{\mathbb{#1}}
 \newcommand{\x}{\times}
@@ -148,6 +159,7 @@
         \item Encoder-Decoder architecture
         \item Positional encoding
     \end{itemize}
+    \footfullcite{Attention}
 \end{frame}
 
 \subsection{Architecture}
@@ -178,7 +190,6 @@
             \end{itemize}
                     
         \end{column}
-        
     \end{columns}
 \end{frame}
 
@@ -284,6 +295,10 @@
     \frametitle{Inductive Bias}
     \includegraphics[scale = 0.25]{inductive-bias.png}
     From GNN\@.
+    \textsf{\textsc{ss}}
 \end{frame}
 
+\begin{frame}
+    \printbibliography{}
+\end{frame}
 \end{document}
