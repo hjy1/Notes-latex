@@ -14,12 +14,7 @@
 \author{HE Jiayou}
 \date{\today}
 
-\usepackage[backend=biber, style=numeric-comp, sorting=none]{biblatex}
-
-\usepackage[]{hyperref}
-\hypersetup{
-    colorlinks=true,
-}
+\usepackage[backend=biber]{biblatex}
 
 \addbibresource{refs.bib}
 \setbeamerfont{footnote}{size=\tiny} %reduce the size of the footnote citation
@@ -65,6 +60,7 @@
             &O_t \in \bb{R}^{n\x q}~~b_h \in \bb{R}^{1\x h} \\
         \end{align*}
     \end{columns}
+    \footfullcite[]{D2l}
 \end{frame}
 
 \subsection{GRU}
@@ -96,7 +92,7 @@
     \frametitle{LSTM}
     The idea is similar to GRU\@.
     \begin{align*}
-        I_t &= \sigma\bigl(X_t W_{xi} + H_{t-1}W_{hi} + b_i\bigr) \\
+        I_t &= \sigma\bigl(X_t W_{xi} + H_{t-1} W_{hi} + b_i\bigr) \\
         F_t &= \sigma\bigl(X_t W_{xf} + H_{t-1} W_{hf} + b_f\bigr) \\
         O_t &= \sigma\bigl(X_t W_{xo} + H_{t-1} W_{ho} + b_o\bigr) \\
         \tilde{C_t} &= \tanh \bigl(X_t W_{xc} + H_{t-1}W_{hc} + b_c\bigr) \\
@@ -113,8 +109,7 @@
         \includegraphics[scale=0.08]{encoder-decoder.png}
         \includegraphics[scale=0.10]{seq2seq.png}
     \end{figure}   
-    \centering 
-    For the purpose of \emph{variable} input and output sequences.
+    \centering
 \end{frame}
 \begin{frame}
     \frametitle{Encoder-Decoder}
@@ -138,6 +133,7 @@
     \end{itemize}
     We call $x$ a \emph{query} and $(x_i, y_i)$ a \emph{key-value} pair. \\
     $\alpha$ is the attention weight, which is the target.
+    \footfullcite[]{D2l}
 \end{frame}
 \begin{frame}
     \frametitle{Attention Prompt}
@@ -155,10 +151,11 @@
 \begin{frame}
     \frametitle{Transformer}
     \begin{itemize}[label = \textbullet]
-        \item Relys entirely on self-attention
+        \item Relys entirely on multi-head self-attention
         \item Encoder-Decoder architecture
         \item Positional encoding
     \end{itemize}
+    \footfullcite[]{Attention}
 \end{frame}
 
 \subsection{Architecture}
@@ -207,7 +204,7 @@
 \subsection{Multi-Head Attention}
 \begin{frame}
     \frametitle{Multi-Head Attention}
-    It is beneficial to linear project $Q, K, V$ to $d_k, d_k, d_v$ dimensions $h$ times.
+    It is beneficial to linearly project $Q, K, V$ to $d_k, d_k, d_v$ dimensions $h$ times.
     \begin{align*}
         Multihead(Q,K,V) &= Concat(head_1, \ldots, head_n) W^O \\
         \text{where}~head_i &= Attention(QW_i^Q, KW_i^K, VW_i^V)
@@ -222,7 +219,6 @@
         \{f(x_i), 1 \le i \le n\}  \\
         \text{where}~f \in \{(x_i, x_i)\}
     \end{align*}
-
 \end{frame}
 
 \subsection{Positional Encoding}
@@ -263,6 +259,7 @@
     \end{itemize}
     \centering
     \includegraphics[scale = 0.4]{model_scheme.pdf}
+    \footfullcite[]{VIT}
 \end{frame}
 
 \section{Medical-Related}
@@ -284,8 +281,9 @@
         \centering
         \includegraphics[scale = 0.9]{figure3.pdf}
     \end{figure}
-    Using \emph{query $g$}  from a coarser scale to provide attention scoring function.
-    Trilinear interpolation is applied.
+    Using \emph{query $g$} from a coarser scale.
+    Resampler\: Trilinear interpolation is applied.
+    \footfullcite{UNet}
 \end{frame}
 
 \section{Conclusion}
@@ -293,11 +291,11 @@
 \begin{frame}
     \frametitle{Inductive Bias}
     \includegraphics[scale = 0.25]{inductive-bias.png}
-    From GNN\@.
-    \textsf{\textsc{ss}}
+    \fullcite{GNN}
 \end{frame}
 
 \begin{frame}
     \printbibliography{}
 \end{frame}
+
 \end{document}
