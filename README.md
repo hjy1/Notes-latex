@@ -1,2 +1,1 @@
-# Latex
-This project aims to store latex files accross devices.
+This project is a personal notes repository. No original works will be posted.
