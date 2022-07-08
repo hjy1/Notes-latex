@@ -3,32 +3,21 @@
 \usepackage[]{amsmath, amsthm, amsfonts}
 \usepackage[scale = 0.8]{geometry}
 \usepackage[]{algorithmic}
-
-\begin{document}
-
+\usepackage[]{enumitem}
+\usepackage[backend=biber]{biblatex}
 \newcommand{\bb}[1]{\mathbb{#1}}
 
-\section{Arcface}
-
-Softmax loss:
-\begin{align*}
-    L_1 = -\frac{1}{N} \sum_{i=1}^N \log \frac{\exp(W_{y_i} \cdot x_i + b_{y_i})}{
-        \sum_{j=1}^n \exp(W_j \cdot x_i + b_j)}
-\end{align*}
-where
-\begin{table}[ht]
-\caption{Explanation}
-\centering
-\begin{tabular}{c c}
-    $N$ & batch size \\
-    $n$ & number of classes \\
-    $x_i \in \bb{R}^d$ & $i$-th sample's embedding \\
-    $y_i$ & Its class \\
-    $W \in \bb{R}^{d \times n}$ & Weight Matrix \\
-    $b_j \in \bb{R}^n$ & Biased term \\
-\end{tabular}
-\end{table}
-
-$L_2$ normalization on $W$, $x_i$
+\begin{document}
+    \section{Motivation}
+        Feature learning demands discrimination which is in some major way endowed by the 
+        loss function design. Additive Angular Margin Loss (Arcface) is so proposed to 
+        incorporate intra-class compactness and inter-class discrepancy, the two aspect for
+        discrimination. This paper claims that arcface constantly outperforms SOTA on 
+        large databases.
+    \section{Geodesic Distance}
+        \begin{itemize}
+            \item Margin Loss: 
+        \end{itemize}
+        
 
 \end{document}
