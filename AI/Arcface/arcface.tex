@@ -4,20 +4,83 @@
 \usepackage[scale = 0.8]{geometry}
 \usepackage[]{algorithmic}
 \usepackage[]{enumitem}
-\usepackage[backend=biber]{biblatex}
+\usepackage[]{graphicx}
+\usepackage[]{wrapfig}
+\usepackage[style=authoryear,sorting=ynt,backend=biber]{biblatex}
+
+\graphicspath{{./images/}}
+
+\addbibresource{refs.bib}
+
 \newcommand{\bb}[1]{\mathbb{#1}}
+\newcommand{\vb}[1]{\mathbf{#1}}
+\renewcommand{\bf}[1]{\textbf{#1}}
+\newcommand{\W}{\vb{W}}
+\newcommand{\X}{\vb{X}}
+\newcommand{\Y}{\vb{Y}}
 
 \begin{document}
     \section{Motivation}
         Feature learning demands discrimination which is in some major way endowed by the 
         loss function design. Additive Angular Margin Loss (Arcface) is so proposed to 
-        incorporate intra-class compactness and inter-class discrepancy, the two aspect for
+        incorporate intra-class compactness and inter-class discrepancy, the footnotes for
         discrimination. This paper claims that arcface constantly outperforms SOTA on 
         large databases.
-    \section{Geodesic Distance}
+    \section{Loss and Geodesic Distance Constraints}
+        Geodesic Distance/Metric $d$ are embedded in loss functions.
         \begin{itemize}
-            \item Margin Loss: 
+            \item Margin Loss\: $d(\vb{x_1, center_1}) + m < d(\vb{x_1, center_2})$
+            \item Intra Loss\: $d(\vb{x_1, center_1}) \searrow$
+            \item Inter Loss\: $d(\vb{center_1, center_2}) \nwarrow$
+            \item Triplet Loss\: $d(\vb{x_{11}, x_{12}}) + m < d(\vb{x_{1i}, x_2}), i = 1,2$
         \end{itemize}
+        This paper picks the margin loss.
+    \section{Face Recognition}
+        Two main line:
+        \begin{itemize}
+            \item To learn a multiclass classifier.
+            \item To learn a ``new'' embedding (identify new person, clustering).
+        \end{itemize}
+    \section{SOTA problems}
+        \begin{itemize}
+            \item High complexity of softmax \& Triplet loss.
+            \item Triplet loss performs unsatisfactory in open-set (clustering)
+        \end{itemize}
+    \section{Inductions}
+        softmax loss:
+        \begin{align*}
+            L_1 &= -\frac{1}{N} \sum_{i=1}^N 
+                \log \frac{\exp{\bigl(W_{y_i}^T x_i + b_{y_i}\bigr)}}
+                    {\sum_{j=1}^n \exp{\bigl(W_j^T x_i + b_j\bigr)}}
+        \end{align*}
+        where $(x_i, y_i)$ forms a pair of deep feature and ground truth of the $i$-th 
+        sample. $W$ is the classification head's parameter.
         
+        This paper gives following modifications on the loss funcions\:
+        \begin{enumerate}[label = \arabic*]
+            \item set $b_j = 0$
+            \item $W_j^T x_i = ||W_j||||x_i||\cos{\theta_j}$
+            \item $l_2$-normalization on $W_j, x_i$, rescale $x_i$ to $s$.
+        \end{enumerate}
+        Thus 
+        \begin{align*}
+            L_2 &= -\frac{1}{N} \sum_{i=1}^N \log 
+                \frac{\exp{(s\cos\theta_{y_i})}}
+                {\exp{(s\cos\theta_{y_i})} + \sum_{j=1, j\neq y_i}\exp{(s\cos\theta_j)}}.
+        \end{align*}
+        And 
+        \begin{align*}
+            L_4 &= -\frac{1}{N} \sum_{i=1}^N \log 
+                \frac{e^{s(\cos(m_1\theta_{y_i}+m_2)-m_3)}}
+                {e^{s(\cos(m_1\theta_{y_i}+m_2)-m_3)} + \sum_{j=1, j\neq y_i}\exp{(s\cos\theta_j)}}
+        \end{align*}
 
+        \newpage
+        Loss comparison of many different losses.
+        \begin{figure}[t]
+            \includegraphics*[scale = 0.3]{margincompare.png}
+        \end{figure}
+        Arcface has a good geometric intepretation. ($m_1 = 1, m_2 = 0.5, m_3 = 0)$.
+    \nocite{arcface}
+    \printbibliography{}
 \end{document}
