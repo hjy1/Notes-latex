@@ -1,0 +1,64 @@
+\documentclass[../main.tex]{subfiles}
+
+\graphicspath{{\subfix{../images/}}}
+
+\begin{document}
+
+\section{Preliminaries}
+
+\subsection*{Multisets}
+
+A \textbf{Multiset} $M$ with \textbf{underlying set} $S$ is a set of ordered pairs 
+\begin{equation*}
+    M = \{(s_i, n_i) | s_i \in S, n_i \in \bb{Z}^+, s_i \neq s_j \forall i \neq j\}
+\end{equation*}
+
+\subsection*{Matrices}
+
+$\Cal{M}_{m,n}\bigl(F\bigr)$: the set of $m \times n$ matrices.
+
+Properties of transpose:
+\begin{enumerate}[label = \arabic*.]
+    \item ${\bigl(A^T\bigr)}^T = A$ 
+    \item ${\bigl(A+B\bigr)}^T = A^T + B^T$
+    \item ${\bigl(rA\bigr)}^T = rA^T~\forall r \in F$
+    \item ${\bigl(AB\bigr)}^T = B^T A^T$ provided that $AB$ is defined.
+    \item $\det\bigl(A^T\bigr) = \det\bigl(A\bigr)$ 
+\end{enumerate}
+
+\subsection*{Partitions/Block Matrices}
+Actually there is another expression:
+\begin{align*}
+    \begin{bmatrix}
+        A_1 & A_2 & \cdots & A_k
+    \end{bmatrix}
+    \begin{bmatrix}
+        B_1 \\ B_2 \\ \vdots \\ B_k
+    \end{bmatrix} &= \sum_{i=1}^k A_i B_i
+\end{align*}
+provided that $A_i B_i$ is defined.
+
+\subsection*{Determinants}
+\begin{enumerate}[label = \arabic*.]
+    \item $\det\bigl(AB\bigr) = \det\bigl(A\bigr)\det\bigl(B\bigr)$
+    \item If 
+        \begin{align*}
+            M &= \begin{bmatrix}
+                B_1 & 0 & \cdots & 0 \\
+                0 & \ddots & \ddots & \vdots \\
+                \vdots & \ddots & \ddots & 0 \\
+                0 & \cdots & 0 & B_n
+            \end{bmatrix}
+        \end{align*}
+        then $\det\bigl(M\bigr) = \prod \det(B_i)$.
+\end{enumerate}
+
+\subsection*{Polynomials}
+More on it later.
+It's basically drawing analogies between polynomials and integers.
+
+\subsection*{Function}
+The 
+
+
+\end{document}
