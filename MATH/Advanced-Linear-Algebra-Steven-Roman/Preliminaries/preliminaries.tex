@@ -58,7 +58,73 @@ More on it later.
 It's basically drawing analogies between polynomials and integers.
 
 \subsection*{Function}
-The 
+\begin{definition}
+    Let $f:S \to T$ be a function from a set $S$ to $T$. Assume that $0 \in T$, the 
+    \emph{\textbf{support}} is 
+    \begin{align*}
+        \text{\emph{supp}}(f) = {s \in S | f(s) \neq 0}
+    \end{align*}
+\end{definition}
 
+If $X \subseteq S$ and $Y \subseteq T$, 
+\begin{align*}
+    f(X) &= \{f(x) | x \in X\} \\
+    f^{-1}(Y) &= {s \in S | f(s) \in Y}
+\end{align*}
+where $f$ doese not need to be injective.
+\begin{align*}
+    f|_A(a) &= f(a) \\
+    \bar{f}: U \to T, U \subseteq S &\text{ for } \bar{f}|_S = f
+\end{align*}
 
+\subsection*{Equivalence Relations}
+\subsubsection*{Example}
+Let $p(x) \sim q(x) \dfeq p(x) = aq(x)$ for some nonzero constant $a\in F$.
+Trivially this is an equivalence relation. Since 
+\begin{align*}
+    p(x) \sim q(x) \implies \deg(p(x)) = \deg(p(x)),
+\end{align*}
+the function of retrieving degrees is an invariant function of $\sim$, not a complete 
+invariant. The set of all monic polynomials is a set of canonical forms.
+
+\subsubsection*{Example}
+Row equivalence on $\CM_{m,n}(F)$. The subset of reduced row echelon form matrices is a 
+set of canonical form for row equivalence.
+
+\subsubsection*{Example}
+$A, B \in \CM_n(F)$ are row equivalent $\dfeq \exists \text{ invertible } P~s.t.~ A = PB$.\\
+$A, B \in \CM_n(F)$ are column equivalent $\dfeq \exists \text{ invertible } Q~s.t.~A=BQ$. \\
+$A, B$ are equivalent $\dfeq \exists \text{ invertible }P, Q~s.t.~A = PBQ$.
+
+After elementary operations 
+\begin{align*}
+    J_k = \begin{bmatrix}
+        I_k& O \\
+        O& O 
+    \end{bmatrix}\in \CM_{m,n}
+\end{align*}
+So $\{J_k\}$ is a canonical form and rank is a complete invariant.
+
+\subsubsection*{Example}
+$A, B \in \CM_n(F)$ is similar $\dfeq \exists \text{ invertible } P~s.t.~A=PBP^{-1}$.
+To be developed.
+
+\subsubsection*{Example}
+$A,B \in \CM_n(F)$ is congruent $\dfeq \exists \text{ invertible } P~s.t.~A = PBP^T$.
+
+Anyway, this book aims to find their canonical form.
+\subsection*{Zorns's Lemma}
+posets: partially ordered set (not necessarily comparable for all elements) \\
+Thus total/linear ordered set. \\
+chain: total ordered subset.
+
+\newtheorem*{zorn}{Zorn's Lemma}
+\begin{zorn}
+    If $P$ is a partially ordered set in which every chain has an upper bound, then $P$ has 
+    a maximal element.
+\end{zorn}
+equivalent to axiom of choice, well-ordering principle.
+
+\section*{Cardinality}
+$|S| = |T| \dfeq$ there is a bijective function.
 \end{document}

@@ -6,15 +6,18 @@
 \usepackage[]{graphicx}
 \graphicspath{images/}
 
-\usepackage[]{blindtext}
 \usepackage[]{subfiles}
 \usepackage[]{amsmath, amsfonts, amsthm}
 \usepackage[]{enumitem}
 
+\newtheorem*{definition}{Definition}
+
 \newcommand{\bb}[1]{\mathbb{#1}}
 \newcommand{\Cal}[1]{\mathcal{#1}}
+\newcommand{\CM}{\mathcal{M}}
+\newcommand{\dfeq}{\overset{def}{\iff}}
 
-
+\setcounter{chapter}{-1}
 \begin{document}
 
 \maketitle
@@ -22,4 +25,9 @@
 
 \chapter{Preliminaries}
 \subfile{Preliminaries/preliminaries}
+
+\part{}
+
+\chapter{Vector Spaces}
+\subfile{Part-I/Chapter-1/Vector-Spaces}
 \end{document}
