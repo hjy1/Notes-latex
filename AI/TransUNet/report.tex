@@ -1,0 +1,59 @@
+\documentclass[]{beamer}
+
+\usepackage[]{graphicx}
+%\usepackage[]{minted}
+\usepackage[]{enumitem}
+
+\usetheme[]{Frankfurt}
+%\usetheme[]{Dresden}
+%\usetheme[]{Antibes}
+%\usetheme[]{Boadilla}
+\usefonttheme[onlymath]{serif}
+\graphicspath{ {./images/} }
+\title[]{Transformer Applications}
+\author{HE Jiayou}
+\date{\today}
+
+\usepackage[backend=biber]{biblatex}
+
+\addbibresource{refs.bib}
+\setbeamerfont{footnote}{size=\tiny} %reduce the size of the footnote citation
+\setbeamertemplate{bibliography item}{\insertbiblabel}  % Add numbered list of references in the end
+
+\newcommand{\bb}[1]{\mathbb{#1}}
+\newcommand{\x}{\times}
+\newcommand{\vc}[1]{\mathbf{#1}}
+
+\AtBeginSection[]
+{
+    \begin{frame}<beamer>
+        \frametitle{Outline}
+        \tableofcontents[
+            currentsection,
+            subsectionstyle=show/hide,
+        ]
+    \end{frame}
+}
+
+\begin{document}
+\frame{\titlepage}
+
+\begin{frame}
+    \frametitle{Table of Contents}
+    \tableofcontents[subsectionstyle=hide, subsubsectionstyle=hide]
+\end{frame}
+
+\section{TransUNet}
+\begin{frame}
+    \begin{enumerate}[label = \arabic*]
+        \item UNet: limitations in explicitly modeling long-range dependency.
+        \item TransUNet: limited localization abilities due to insufficient low-level details.
+    \end{enumerate}
+    \footfullcite[]{TransUNet}
+\end{frame}
+
+\begin{frame}
+    \printbibliography{}
+\end{frame}
+
+\end{document}
